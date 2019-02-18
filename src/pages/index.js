@@ -25,7 +25,6 @@ const Slider = styled(Hero)`
 
   h1 {
     line-height: 1em;
-    letter-spacing: 0.015em;
     margin-bottom: 0;
     vertical-align: baseline;
     font-weight: bolder;
