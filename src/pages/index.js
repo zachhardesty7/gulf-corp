@@ -6,15 +6,12 @@ import GImage from 'gatsby-image'
 import styled from 'styled-components'
 import { Blurbs, Hero } from 'semantic-styled-ui'
 
-import Eurostile from '../../static/eurostile-lt-oblique.ttf'
-import FranklinGothicBook from '../../static/franklin-gothic-book-regular.ttf'
-
 import { defaultColors } from '../utils'
 
 const Slider = styled(Hero)`
   @font-face {
     font-family: 'Franklin Gothic Book';
-    src: url(${FranklinGothicBook}) format('truetype');
+    src: url('../../static/franklin-gothic-book-regular.ttf') format('truetype');
     font-weight: bolder;
     font-display: swap;
   }
@@ -22,7 +19,7 @@ const Slider = styled(Hero)`
   @font-face {
     font-family: 'Eurostile';
     font-style: italic;
-    src: url(${Eurostile}) format('truetype');
+    src: url('../../static/eurostile-lt-std-bold-oblique.ttf') format('truetype');
     font-display: swap;
   }
 
