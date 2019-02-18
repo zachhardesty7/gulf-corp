@@ -9,7 +9,7 @@ import {
   Header,
   Grid
 } from 'semantic-ui-react'
-import { PortfolioItem } from '../components'
+import { PortfolioItem } from 'semantic-styled-ui'
 
 import { media, utils } from '../utils'
 

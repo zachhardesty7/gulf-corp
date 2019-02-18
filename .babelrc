@@ -40,7 +40,6 @@
       }
     ],
     "@babel/plugin-syntax-dynamic-import",
-    "babel-plugin-macros",
     [
       "@babel/plugin-transform-runtime",
       {

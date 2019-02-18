@@ -1,30 +1,34 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { graphql } from 'gatsby'
+import GImage from 'gatsby-image'
 
 import styled from 'styled-components'
-import { Hero } from '../components'
-import { Blurbs } from '../components/sections'
+import { Blurbs, Hero } from 'semantic-styled-ui'
+
+import Eurostile from '../../static/eurostile-lt-oblique.ttf'
+import FranklinGothicBook from '../../static/franklin-gothic-book-regular.ttf'
 
 import { defaultColors } from '../utils'
 
 const Slider = styled(Hero)`
   @font-face {
-    font-family: 'Eurostile';
-    font-style: italic;
-    src: url('../../static/eurostile-lt-std-bold-oblique.ttf') format('truetype');
+    font-family: 'Franklin Gothic Book';
+    src: url(${FranklinGothicBook}) format('truetype');
+    font-weight: bolder;
     font-display: swap;
   }
 
   @font-face {
-    font-family: 'Franklin Gothic Book';
-    src: url('../../static/franklin-gothic-book-regular.ttf') format('truetype');
-    font-weight: bolder;
+    font-family: 'Eurostile';
+    font-style: italic;
+    src: url(${Eurostile}) format('truetype');
     font-display: swap;
   }
 
   h1 {
     line-height: 1em;
+    letter-spacing: 0.015em;
     margin-bottom: 0;
     vertical-align: baseline;
     font-weight: bolder;
@@ -49,10 +53,13 @@ const Index = ({ data }) => {
         baseline='top'
         size='relaxed'
         underline={defaultColors.accent}
-        background={hero.backgrounds}
         title={hero.title}
         subtitle={hero.subtitle}
-      />
+      >
+        {hero.backgrounds.map(background => (
+          <GImage fluid={background.fluid} alt={background.title} key={background.title} />
+        ))}
+      </Slider>
       <Blurbs
         color={defaultColors.primary}
         blurbs={blurbs}

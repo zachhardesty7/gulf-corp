@@ -1,12 +1,13 @@
 import React from 'react'
 import { Helmet } from 'react-helmet'
 import PropTypes from 'prop-types'
-import { StaticQuery, graphql } from 'gatsby'
+import { Link, StaticQuery, graphql } from 'gatsby'
+import GImage from 'gatsby-image'
 
 import { createGlobalStyle, ThemeProvider } from 'styled-components'
 import 'semantic-ui-css/semantic.min.css'
 
-import { Navigation, Footer } from '../components'
+import { Navigation, Footer } from 'semantic-styled-ui'
 import { defaultColors, media } from '../utils'
 
 const GlobalStyle = createGlobalStyle`
@@ -109,15 +110,13 @@ const Template = ({ result, children }) => {
 
         <GlobalStyle />
         <Navigation
-          logo={nav.image.fixed}
-          logoAlt='logo'
+          as={Link}
+          logo={<GImage fixed={nav.image.fixed} alt='logo' />}
           stacked
           centered
         >
           {/* REVIEW: is this actually better than a "pages" prop? */}
-          <Navigation.Item>About</Navigation.Item>
-          <Navigation.Item>Portfolio</Navigation.Item>
-          <Navigation.Item>Contact</Navigation.Item>
+          {nav.pages.map(page => <Navigation.Item as={Link} key={page}>{page}</Navigation.Item>)}
         </Navigation>
 
         {children}
