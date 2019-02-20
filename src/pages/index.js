@@ -2,11 +2,14 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { graphql } from 'gatsby'
 import GImage from 'gatsby-image'
+import Async from 'react-promise'
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import styled from 'styled-components'
 import { Blurbs, Hero } from 'semantic-styled-ui'
 
-import { defaultColors } from '../utils'
+import { defaultColors, utils } from '../utils'
 
 const Slider = styled(Hero)`
   @font-face {
@@ -56,10 +59,28 @@ const Index = ({ data }) => {
           <GImage fluid={background.fluid} alt={background.title} key={background.title} />
         ))}
       </Slider>
-      <Blurbs
-        color={defaultColors.primary}
-        blurbs={blurbs}
-      />
+
+      <Blurbs color={defaultColors.primary}>
+        {blurbs.map(blurb => (
+          <Async
+            key={utils.toJoinedTitleCase(blurb.title)}
+            promise={import('@fortawesome/free-solid-svg-icons')}
+            then={icon => (
+              <Blurbs.Item
+                icon={blurb.icon
+                  ? <FontAwesomeIcon icon={icon[`fa${utils.toJoinedTitleCase(blurb.icon)}`]} size='3x' />
+                  : null
+                }
+                header={blurb.title}
+                headerColor={defaultColors.primary}
+              >
+                {blurb.body && blurb.body.body}
+              </Blurbs.Item>
+            )}
+          />
+        ))}
+
+      </Blurbs>
     </>
   )
 }
