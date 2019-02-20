@@ -2,6 +2,7 @@ import React from 'react'
 import { Helmet } from 'react-helmet'
 import PropTypes from 'prop-types'
 import { graphql } from 'gatsby'
+import GImage from 'gatsby-image'
 
 import {
   Segment,
@@ -39,7 +40,16 @@ const portfolio = ({ data }) => {
             doubling
           >
             {pieces.map(piece => (
-              <PortfolioItem key={utils.process(`${piece.name} ${piece.location}`)} piece={piece} />
+              <PortfolioItem
+                key={utils.process(`${piece.name} ${piece.location}`)}
+                title={piece.name}
+                subtitle={piece.location}
+              >
+                <GImage
+                  fluid={piece.image.fluid}
+                  alt={utils.process(`${piece.name} ${piece.location}`)}
+                />
+              </PortfolioItem>
             ))}
           </Grid>
         </Container>
