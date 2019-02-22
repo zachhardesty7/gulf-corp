@@ -1,3 +1,5 @@
+const path = require('path')
+
 let contentfulConfig
 
 try {
@@ -22,6 +24,9 @@ if (!spaceId || !accessToken) {
 }
 
 module.exports = {
+  siteMetadata: {
+    siteUrl: 'https://www.gulfcorpusa.com'
+  },
   plugins: [
     {
       resolve: `gatsby-plugin-layout`,
@@ -37,6 +42,7 @@ module.exports = {
         respectDNT: true
       }
     },
+    'gatsby-plugin-sitemap',
     // 'gatsby-plugin-webpack-bundle-analyzer',
     // TODO: investigate and fix styling issues
     // likely hydration related: https://reactjs.org/docs/react-dom.html#hydrate
@@ -86,8 +92,21 @@ module.exports = {
       }
     },
     {
+      resolve: `gatsby-plugin-purgecss`,
+      options: {
+        content: [
+          // REVIEW: check out other sol, possibly run from CLI
+          path.join(process.cwd(), 'public/**/!(*.d).{ts,js,jsx,tsx}')
+        ],
+        keyframes: true,
+        printRejected: true // Print removed selectors and processed file names
+        // develop: true // Enable while using `gatsby develop`
+      }
+    },
+    {
       resolve: 'gatsby-source-contentful',
       options: contentfulConfig
-    }
+    },
+    'gatsby-plugin-netlify'
   ]
 }

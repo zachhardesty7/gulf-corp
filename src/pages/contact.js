@@ -10,7 +10,7 @@ import {
 } from 'semantic-ui-react'
 import { Form } from 'semantic-styled-ui'
 
-const contact = ({ data }) => {
+const Contact = ({ data }) => {
   const {
     title, form, address, phone
   } = data.allContentfulContact.edges[0].node
@@ -39,18 +39,18 @@ const contact = ({ data }) => {
   )
 }
 
-contact.propTypes = {
+Contact.propTypes = {
   data: PropTypes.object // eslint-disable-line react/forbid-prop-types
 }
 
-contact.defaultProps = {
+Contact.defaultProps = {
   data: {}
 }
 
-export default React.memo(contact)
+export default React.memo(Contact)
 
-export const dataQuery = graphql`
-  query {
+export const pageQuery = graphql`
+  query ContactRoute {
     allContentfulContact(sort: { fields: [contentful_id] }) {
       edges {
         node {

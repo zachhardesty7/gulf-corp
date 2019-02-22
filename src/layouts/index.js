@@ -99,6 +99,7 @@ const Template = ({ result, children }) => {
           titleTemplate='Gulf Corp – %s'
         >
           <meta charSet='utf-8' />
+          <html lang='en' />
           <meta name='description' content='Real Estate Development & Construction' />
           <meta name='keywords' content='Real Estate, Development, Construction, Property' />
           <meta name='author' content='Austin Ames' />

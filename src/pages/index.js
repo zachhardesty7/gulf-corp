@@ -2,9 +2,6 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { graphql } from 'gatsby'
 import GImage from 'gatsby-image'
-import Async from 'react-promise'
-
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import styled from 'styled-components'
 import { Blurbs, Hero } from 'semantic-styled-ui'
@@ -30,6 +27,7 @@ const Slider = styled(Hero)`
     line-height: 1em;
     margin-bottom: 0;
     vertical-align: baseline;
+    font-display: swap;
     font-weight: bolder;
     font-style: italic;
     font-family: 'Franklin Gothic Book', Tahoma, Arial, Helvetica, sans-serif !important;
@@ -37,6 +35,7 @@ const Slider = styled(Hero)`
 
   h2 {
     margin-top: 0;
+    font-display: swap;
     font-style: italic;
     font-weight: normal;
     font-family: 'Eurostile', Tahoma, Arial, Helvetica, sans-serif !important;
@@ -62,22 +61,13 @@ const Index = ({ data }) => {
 
       <Blurbs color={defaultColors.primary}>
         {blurbs.map(blurb => (
-          <Async
+          <Blurbs.Item
             key={utils.toJoinedTitleCase(blurb.title)}
-            promise={import('@fortawesome/free-solid-svg-icons')}
-            then={icon => (
-              <Blurbs.Item
-                icon={blurb.icon
-                  ? <FontAwesomeIcon icon={icon[`fa${utils.toJoinedTitleCase(blurb.icon)}`]} size='3x' />
-                  : null
-                }
-                header={blurb.title}
-                headerColor={defaultColors.primary}
-              >
-                {blurb.body && blurb.body.body}
-              </Blurbs.Item>
-            )}
-          />
+            header={blurb.title}
+            headerColor={defaultColors.primary}
+          >
+            {blurb.body && blurb.body.body}
+          </Blurbs.Item>
         ))}
 
       </Blurbs>
@@ -95,8 +85,8 @@ Index.defaultProps = {
 
 export default React.memo(Index)
 
-export const dataQuery = graphql`
-  query {
+export const pageQuery = graphql`
+  query IndexRoute {
     allContentfulIndex(sort: {fields: [contentful_id]}) {
       edges {
         node {

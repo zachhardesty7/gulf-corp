@@ -43,7 +43,7 @@ const ModalContact = styled.div`
   }
 `
 
-const about = ({ data }) => {
+const About = ({ data }) => {
   const { title, subtitle, cards } = data.allContentfulAbout.edges[0].node
 
   return (
@@ -115,18 +115,19 @@ const about = ({ data }) => {
   )
 }
 
-about.propTypes = {
+About.propTypes = {
+  // REVIEW: defined below...
   data: PropTypes.object // eslint-disable-line react/forbid-prop-types
 }
 
-about.defaultProps = {
+About.defaultProps = {
   data: {}
 }
 
-export default React.memo(about)
+export default React.memo(About)
 
-export const dataQuery = graphql`
-  query {
+export const pageQuery = graphql`
+  query AboutRoute {
     allContentfulAbout(sort: { fields: [contentful_id] }) {
       edges {
         node {

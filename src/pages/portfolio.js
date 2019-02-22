@@ -14,7 +14,7 @@ import { PortfolioItem } from 'semantic-styled-ui'
 
 import { media, utils } from '../utils'
 
-const portfolio = ({ data }) => {
+const Portfolio = ({ data }) => {
   const { title, pieces } = data.allContentfulPortfolio.edges[0].node
 
   return (
@@ -58,18 +58,18 @@ const portfolio = ({ data }) => {
   )
 }
 
-portfolio.propTypes = {
+Portfolio.propTypes = {
   data: PropTypes.object // eslint-disable-line react/forbid-prop-types
 }
 
-portfolio.defaultProps = {
+Portfolio.defaultProps = {
   data: {}
 }
 
-export default React.memo(portfolio)
+export default React.memo(Portfolio)
 
-export const dataQuery = graphql`
-  query {
+export const pageQuery = graphql`
+  query PortfolioRoute {
     allContentfulPortfolio(sort: { fields: [contentful_id] }) {
       edges {
         node {
