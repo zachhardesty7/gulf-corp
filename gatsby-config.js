@@ -91,18 +91,18 @@ module.exports = {
         pure: true
       }
     },
-    {
-      resolve: `gatsby-plugin-purgecss`,
-      options: {
-        content: [
-          // REVIEW: check out other sol, possibly run from CLI
-          path.join(process.cwd(), 'public/**/!(*.d).{ts,js,jsx,tsx}')
-        ],
-        keyframes: true,
-        printRejected: true // Print removed selectors and processed file names
-        // develop: true // Enable while using `gatsby develop`
-      }
-    },
+    // {
+    //   resolve: `gatsby-plugin-purgecss`,
+    //   options: {
+    //     content: [
+    //       // REVIEW: check out other sol, possibly run from CLI
+    //       path.join(process.cwd(), 'public/**/!(*.d).{ts,js,jsx,tsx}')
+    //     ],
+    //     keyframes: true,
+    //     printRejected: true // Print removed selectors and processed file names
+    //     // develop: true // Enable while using `gatsby develop`
+    //   }
+    // },
     {
       resolve: 'gatsby-source-contentful',
       options: contentfulConfig
