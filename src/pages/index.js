@@ -27,7 +27,6 @@ const Slider = styled(Hero)`
     line-height: 1em;
     margin-bottom: 0;
     vertical-align: baseline;
-    font-display: swap;
     font-weight: bolder;
     font-style: italic;
     font-family: 'Franklin Gothic Book', Tahoma, Arial, Helvetica, sans-serif !important;
@@ -35,7 +34,6 @@ const Slider = styled(Hero)`
 
   h2 {
     margin-top: 0;
-    font-display: swap;
     font-style: italic;
     font-weight: normal;
     font-family: 'Eurostile', Tahoma, Arial, Helvetica, sans-serif !important;
