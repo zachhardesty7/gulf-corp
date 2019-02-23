@@ -1,4 +1,4 @@
-const path = require('path')
+// const path = require('path')
 
 let contentfulConfig
 
@@ -38,12 +38,16 @@ module.exports = {
       resolve: `gatsby-plugin-google-analytics`,
       options: {
         trackingId: 'UA-133288229-1',
-        // Setting this parameter is also optional
         respectDNT: true
       }
     },
     'gatsby-plugin-sitemap',
-    // 'gatsby-plugin-webpack-bundle-analyzer',
+    {
+      resolve: 'gatsby-plugin-webpack-bundle-analyzer',
+      options: {
+        // production: true
+      }
+    },
     // TODO: investigate and fix styling issues
     // likely hydration related: https://reactjs.org/docs/react-dom.html#hydrate
     // optionally try babel-plugin-styled-components

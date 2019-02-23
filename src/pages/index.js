@@ -11,6 +11,7 @@ import { defaultColors, utils } from '../utils'
 const Slider = styled(Hero)`
   @font-face {
     font-family: 'Franklin Gothic Book';
+    /* FIXME: url -> /public/ */
     src: url('../../static/franklin-gothic-book-regular.ttf') format('truetype');
     font-weight: bolder;
     font-display: swap;
