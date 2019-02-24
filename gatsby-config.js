@@ -24,18 +24,19 @@ if (!spaceId || !accessToken) {
 }
 
 module.exports = {
+  pathPrefix: '/',
   siteMetadata: {
     siteUrl: 'https://www.gulfcorpusa.com'
   },
   plugins: [
     {
-      resolve: `gatsby-plugin-layout`,
+      resolve: 'gatsby-plugin-layout',
       options: {
-        component: require.resolve(`./src/layouts/`)
+        component: require.resolve('./src/layouts/')
       }
     },
     {
-      resolve: `gatsby-plugin-google-analytics`,
+      resolve: 'gatsby-plugin-google-analytics',
       options: {
         trackingId: 'UA-133288229-1',
         respectDNT: true
@@ -48,7 +49,7 @@ module.exports = {
         // production: true
       }
     },
-    // TODO: investigate and fix styling issues
+    // TODO: investigate and fix styling issues when run offline
     // likely hydration related: https://reactjs.org/docs/react-dom.html#hydrate
     // optionally try babel-plugin-styled-components
     // 'gatsby-plugin-offline',
@@ -58,7 +59,7 @@ module.exports = {
     'gatsby-plugin-sharp',
     'gatsby-transformer-sharp',
     {
-      resolve: `gatsby-plugin-favicon`,
+      resolve: 'gatsby-plugin-favicon',
       options: {
         logo: './src/favicon.png',
 
@@ -92,21 +93,11 @@ module.exports = {
     {
       resolve: 'gatsby-plugin-styled-components',
       options: {
-        pure: true
+        pure: process.env.NODE_ENV === 'production',
+        fileName: process.env.NODE_ENV !== 'production',
+        displayName: process.env.NODE_ENV !== 'production'
       }
     },
-    // {
-    //   resolve: `gatsby-plugin-purgecss`,
-    //   options: {
-    //     content: [
-    //       // REVIEW: check out other sol, possibly run from CLI
-    //       path.join(process.cwd(), 'public/**/!(*.d).{ts,js,jsx,tsx}')
-    //     ],
-    //     keyframes: true,
-    //     printRejected: true // Print removed selectors and processed file names
-    //     // develop: true // Enable while using `gatsby develop`
-    //   }
-    // },
     {
       resolve: 'gatsby-source-contentful',
       options: contentfulConfig
