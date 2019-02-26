@@ -7,7 +7,7 @@ import GImage from 'gatsby-image'
 import { createGlobalStyle, ThemeProvider } from 'styled-components'
 import 'semantic-ui-css/semantic.min.css'
 
-import { Navigation, Footer, SocialMediaIcon } from 'semantic-styled-ui'
+import { Navigation, Footer } from 'semantic-styled-ui'
 import { defaultColors, media } from '../utils'
 
 const GlobalStyle = createGlobalStyle`
