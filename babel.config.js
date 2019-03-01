@@ -24,6 +24,7 @@ module.exports = {
     ]
   ],
   plugins: [
+    'transform-semantic-ui-react-style-imports',
     'transform-react-remove-prop-types',
     '@babel/plugin-proposal-optional-chaining',
     [

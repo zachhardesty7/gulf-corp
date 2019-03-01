@@ -10,6 +10,9 @@ import {
 } from 'semantic-ui-react'
 import { Form } from 'semantic-styled-ui'
 
+// REVIEW: unsure why bundler is missing this file
+import 'semantic-ui-css/components/input.min.css'
+
 const Contact = ({ data }) => {
   const {
     title, form, address, phone
