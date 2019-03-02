@@ -54,7 +54,7 @@
     "purge": "purgecss --css public/**/*.css --content public/**/*.js --out public/",
     "dev": "gatsby develop",
     "dev:https": "gatsby develop --https",
-    "test": "gatsby build --no-uglify && gatsby serve",
+    "test": "npm run build && npm run serve",
     "serve": "gatsby serve",
     "build": "gatsby build && npm run purge"
   }

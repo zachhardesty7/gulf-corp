@@ -50,7 +50,7 @@ module.exports = {
     // TODO: investigate and fix styling issues when run offline
     // likely hydration related: https://reactjs.org/docs/react-dom.html#hydrate
     // optionally try babel-plugin-styled-components
-    // 'gatsby-plugin-offline',
+    'gatsby-plugin-offline',
     'gatsby-plugin-react-helmet',
     {
       resolve: 'gatsby-plugin-favicon',
