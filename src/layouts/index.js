@@ -114,14 +114,15 @@ const Template = ({ result, children }) => {
         </Helmet>
 
         <GlobalStyle />
-        <Navigation
-          as={Link}
-          logo={<GImage fixed={nav.image.fixed} alt='logo' />}
-          stacked
-          centered
-        >
+        <Navigation tag={Link}>
+          <Navigation.Logo stacked tabIndex='0'>
+            <GImage fixed={nav.image.fixed} alt='logo' />
+          </Navigation.Logo>
+
           {/* REVIEW: is this actually better than a "pages" prop? */}
-          {nav.pages.map(page => <Navigation.Item as={Link} key={page}>{page}</Navigation.Item>)}
+          {nav.pages.map((page, i) => (
+            <Navigation.Item key={page} tabIndex={i + 1}>{page}</Navigation.Item>
+          ))}
         </Navigation>
 
         {children}
@@ -151,6 +152,7 @@ Template.defaultProps = {
   children: null
 }
 
+// eslint-disable-next-line react/display-name
 export default React.memo(props => (
   <StaticQuery
     query={graphql`
