@@ -44,7 +44,7 @@ module.exports = {
     {
       resolve: 'gatsby-plugin-webpack-bundle-analyzer',
       options: {
-        production: true
+        // production: true
       }
     },
     // TODO: investigate and fix styling issues when run offline
