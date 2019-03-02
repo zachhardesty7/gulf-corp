@@ -18,16 +18,17 @@ const Portfolio = ({ data }) => {
   const { title, pieces } = data.allContentfulPortfolio.edges[0].node
 
   return (
-    <Segment padded vertical basic>
+    <Segment as='main' padded vertical basic>
       <Helmet>
         <title>Portfolio</title>
       </Helmet>
 
-      <Container css={`
-        ${media.mobile`
-          max-width: calc(375px + 3em) !important;
+      <Container
+        css={`
+          ${media.mobile`
+            max-width: calc(375px + 3em) !important;
+          `}
         `}
-      `}
       >
         <Header as='h1'>{title}</Header>
       </Container>

@@ -16,7 +16,14 @@ import {
 
 import { defaultColors, utils } from '../utils'
 
-// TODO: conditional swap to "img" when not using gatsby?
+const Profile = styled.section`
+  cursor: pointer;
+`
+
+const ProfileName = styled.h3`
+  margin-bottom: 0;
+`
+
 const ProfileImage = styled(GImage)`
   height: 300px;
   object-fit: cover;
@@ -28,7 +35,7 @@ const ModalImage = styled(GImage)`
   object-position: 50% 10%;
 `
 
-const ModalContact = styled.div`
+const ModalContact = styled.address`
   padding-top: 1.5em;
 
   a {
@@ -47,7 +54,7 @@ const About = ({ data }) => {
   const { title, subtitle, cards } = data.allContentfulAbout.edges[0].node
 
   return (
-    <Segment padded vertical basic>
+    <Segment as='main' padded vertical basic>
       <Helmet>
         <title>About</title>
       </Helmet>
@@ -67,20 +74,21 @@ const About = ({ data }) => {
                 // must use semi-hacky extra root class
                 // REVIEW: use "mountNode" prop with passed ref? how to get ref?
                 // would allow mounting underneath ".root" div instead of document.body
+                as='section'
                 className='root'
                 key={utils.process(card.name)}
                 closeIcon
                 trigger={(
-                  <Card>
+                  <Card as={Profile}>
                     <ProfileImage fluid={card.image.fluid} />
                     <Card.Content>
-                      <Card.Header>{card.name}</Card.Header>
-                      <Card.Meta>{card.title}</Card.Meta>
+                      <Card.Header as={ProfileName}>{card.name}</Card.Header>
+                      <Card.Meta as='p'>{card.title}</Card.Meta>
                     </Card.Content>
                   </Card>
                 )}
               >
-                <Modal.Header>
+                <Modal.Header as='h2'>
                   {card.name}
                   <br />
                   {card.title}

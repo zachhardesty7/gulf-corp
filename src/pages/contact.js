@@ -9,9 +9,14 @@ import {
   Segment
 } from 'semantic-ui-react'
 import { Form } from 'semantic-styled-ui'
+import styled from 'styled-components'
 
 // REVIEW: unsure why bundler is missing this file
 import 'semantic-ui-css/components/input.min.css'
+
+const ContactInfo = styled.address`
+  padding-top: 2.25em;
+`
 
 const Contact = ({ data }) => {
   const {
@@ -19,7 +24,7 @@ const Contact = ({ data }) => {
   } = data.allContentfulContact.edges[0].node
 
   return (
-    <Segment padded vertical basic>
+    <Segment as='main' padded vertical basic>
       <Helmet>
         <title>Contact</title>
       </Helmet>
@@ -32,7 +37,7 @@ const Contact = ({ data }) => {
           textArea={form.textArea}
           button={form.button}
         />
-        <Header.Content css='padding-top: 2.25em'>
+        <Header.Content as={ContactInfo}>
           <p>{address.split('|')[0]}</p>
           <p>{address.split('|')[1]}</p>
           <p>{phone}</p>

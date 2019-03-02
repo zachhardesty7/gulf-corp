@@ -14,9 +14,13 @@ const GlobalStyle = createGlobalStyle`
   body {
     overflow-y: overlay;
     font-size: 1em;
-    line-height: 1.65;
+    line-height: 1.65em;
     color: ${({ theme }) => theme?.dark || defaultColors.dark};
     margin: 0;
+  }
+
+  p {
+    line-height: 1.65em;
   }
 
   img {

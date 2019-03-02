@@ -45,7 +45,7 @@ const Index = ({ data }) => {
   const { hero, blurbs } = data.allContentfulIndex.edges[0].node
 
   return (
-    <>
+    <main>
       <Slider
         baseline='top'
         size='relaxed'
@@ -70,7 +70,7 @@ const Index = ({ data }) => {
         ))}
 
       </Blurbs>
-    </>
+    </main>
   )
 }
 
