@@ -24,8 +24,12 @@ module.exports = {
     ]
   ],
   plugins: [
-    'transform-semantic-ui-react-style-imports',
-    'transform-react-remove-prop-types',
+    'babel-plugin-transform-semantic-ui-react-style-imports',
+    [
+      'transform-react-remove-prop-types', {
+        removeImport: true
+      }
+    ],
     '@babel/plugin-proposal-optional-chaining',
     [
       '@quickbaseoss/babel-plugin-styled-components-css-namespace',

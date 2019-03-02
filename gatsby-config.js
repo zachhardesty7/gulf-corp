@@ -1,5 +1,3 @@
-// const path = require('path')
-
 let contentfulConfig
 
 try {
@@ -46,18 +44,14 @@ module.exports = {
     {
       resolve: 'gatsby-plugin-webpack-bundle-analyzer',
       options: {
-        // production: true
+        production: true
       }
     },
     // TODO: investigate and fix styling issues when run offline
     // likely hydration related: https://reactjs.org/docs/react-dom.html#hydrate
     // optionally try babel-plugin-styled-components
     // 'gatsby-plugin-offline',
-    'gatsby-plugin-remove-serviceworker',
-    'gatsby-transformer-remark',
     'gatsby-plugin-react-helmet',
-    'gatsby-plugin-sharp',
-    'gatsby-transformer-sharp',
     {
       resolve: 'gatsby-plugin-favicon',
       options: {
