@@ -12,7 +12,7 @@ import {
 } from 'semantic-ui-react'
 import { PortfolioItem } from 'semantic-styled-ui'
 
-import { media, utils } from '../utils'
+import { media, process } from '../utils'
 
 const Portfolio = ({ data }) => {
   const { title, pieces } = data.allContentfulPortfolio.edges[0].node
@@ -42,13 +42,13 @@ const Portfolio = ({ data }) => {
           >
             {pieces.map(piece => (
               <PortfolioItem
-                key={utils.process(`${piece.name} ${piece.location}`)}
+                key={process(`${piece.name} ${piece.location}`)}
                 title={piece.name}
                 subtitle={piece.location}
               >
                 <GImage
                   fluid={piece.image.fluid}
-                  alt={utils.process(`${piece.name} ${piece.location}`)}
+                  alt={process(`${piece.name} ${piece.location}`)}
                 />
               </PortfolioItem>
             ))}

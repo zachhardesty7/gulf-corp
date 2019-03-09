@@ -2,6 +2,7 @@ import React from 'react'
 import { Helmet } from 'react-helmet'
 import PropTypes from 'prop-types'
 import { graphql } from 'gatsby'
+import styled from 'styled-components'
 
 import {
   Container,
@@ -9,12 +10,13 @@ import {
   Segment
 } from 'semantic-ui-react'
 import { Form } from 'semantic-styled-ui'
-import styled from 'styled-components'
 
 // REVIEW: unsure why bundler is missing this file
 import 'semantic-ui-css/components/input.min.css'
+import { applyTag } from '../utils';
 
-const ContactInfo = styled.address`
+const ContactInfoTagged = applyTag(Header.Content)
+const ContactInfo = styled(ContactInfoTagged)`
   padding-top: 2.25em;
 `
 
@@ -37,11 +39,11 @@ const Contact = ({ data }) => {
           textArea={form.textArea}
           button={form.button}
         />
-        <Header.Content as={ContactInfo}>
+        <ContactInfo tag='address'>
           <p>{address.split('|')[0]}</p>
           <p>{address.split('|')[1]}</p>
           <p>{phone}</p>
-        </Header.Content>
+        </ContactInfo>
       </Container>
     </Segment>
   )

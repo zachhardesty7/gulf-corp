@@ -1,21 +1,21 @@
 import React from 'react'
 import { Helmet } from 'react-helmet'
 import PropTypes from 'prop-types'
-import { Link, StaticQuery, graphql } from 'gatsby'
+import { Link, StaticQuery, graphql, useStaticQuery } from 'gatsby'
 import GImage from 'gatsby-image'
 
 import { createGlobalStyle, ThemeProvider } from 'styled-components'
 import 'semantic-ui-css/semantic.min.css'
 
 import { Navigation, Footer } from 'semantic-styled-ui'
-import { defaultColors, media } from '../utils'
+import { getColor, getHoverColor, media } from '../utils'
 
 const GlobalStyle = createGlobalStyle`
   body {
     overflow-y: overlay;
     font-size: 1em;
     line-height: 1.65em;
-    color: ${({ theme }) => theme?.dark || defaultColors.dark};
+    ${getColor('dark')}
     margin: 0;
   }
 
@@ -29,10 +29,8 @@ const GlobalStyle = createGlobalStyle`
   }
 
   a {
-    color: ${({ theme }) => theme?.secondary || defaultColors.secondary};
-    &:hover {
-      color: ${({ theme }) => theme?.white || defaultColors.white};
-    }
+    ${getColor('secondary')}
+    ${getHoverColor('white')}
   }
 
   ${media.desktop`
@@ -79,9 +77,35 @@ const GlobalStyle = createGlobalStyle`
   `}
 `
 
-const Template = ({ result, children }) => {
-  const nav = result.allContentfulNavigation.edges[0].node
-  const footer = result.allContentfulFooter.edges[0].node
+const Template = ({ children }) => {
+  const data = useStaticQuery(graphql`
+    query RouteTemplate {
+      allContentfulNavigation(sort: {fields: [contentful_id]}) {
+        edges {
+          node {
+            image {
+              title
+              fixed(width: 215) {
+                ...GatsbyContentfulFixed_withWebp
+              }
+            }
+            pages
+          }
+        }
+      }
+
+      allContentfulFooter(sort: {fields: [contentful_id]}) {
+        edges {
+          node {
+            company
+          }
+        }
+      }
+    }
+  `)
+
+  const nav = data.allContentfulNavigation.edges[0].node
+  const footer = data.allContentfulFooter.edges[0].node
 
   const gulfColors = {
     blue: '#172749',
@@ -93,7 +117,7 @@ const Template = ({ result, children }) => {
     <ThemeProvider theme={{
       ...gulfColors,
       primary: gulfColors.blue,
-      secondary: defaultColors.white,
+      secondary: 'white',
       accent: gulfColors.red
     }}
     >
@@ -114,12 +138,11 @@ const Template = ({ result, children }) => {
         </Helmet>
 
         <GlobalStyle />
-        <Navigation tag={Link}>
+        <Navigation size='large' tag={Link}>
           <Navigation.Logo stacked tabIndex='0'>
             <GImage fixed={nav.image.fixed} alt='logo' />
           </Navigation.Logo>
 
-          {/* REVIEW: is this actually better than a "pages" prop? */}
           {nav.pages.map((page, i) => (
             <Navigation.Item key={page} tabIndex={i + 1}>{page}</Navigation.Item>
           ))}
@@ -140,48 +163,11 @@ const Template = ({ result, children }) => {
 }
 
 Template.propTypes = {
-  result: PropTypes.object, // eslint-disable-line react/forbid-prop-types
-  children: PropTypes.oneOfType([
-    PropTypes.element,
-    PropTypes.arrayOf(PropTypes.element)
-  ])
+  children: PropTypes.node
 }
 
 Template.defaultProps = {
-  result: {},
   children: null
 }
 
-// eslint-disable-next-line react/display-name
-export default React.memo(props => (
-  <StaticQuery
-    query={graphql`
-      query {
-        allContentfulNavigation(sort: {fields: [contentful_id]}) {
-          edges {
-            node {
-              image {
-                title
-                fixed(width: 215) {
-                  ...GatsbyContentfulFixed_withWebp
-                }
-              }
-              pages
-            }
-          }
-        }
-
-        allContentfulFooter(sort: {fields: [contentful_id]}) {
-          edges {
-            node {
-              company
-            }
-          }
-        }
-      }
-    `}
-    // IMPORTANT: queried data cannot be passed through the "data" prop
-    // as it will be overrode by the wrapped page's query data
-    render={data => <Template result={data} {...props} />}
-  />
-))
+export default React.memo(Template)

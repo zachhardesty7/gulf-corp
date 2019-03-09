@@ -6,7 +6,7 @@ import GImage from 'gatsby-image'
 import styled from 'styled-components'
 import { Blurbs, Hero } from 'semantic-styled-ui'
 
-import { defaultColors, utils } from '../utils'
+import { defaultColors, toJoinedTitleCase } from '../utils'
 
 const Slider = styled(Hero)`
   @font-face {
@@ -61,11 +61,11 @@ const Index = ({ data }) => {
       <Blurbs color={defaultColors.primary}>
         {blurbs.map(blurb => (
           <Blurbs.Item
-            key={utils.toJoinedTitleCase(blurb.title)}
+            key={toJoinedTitleCase(blurb.title)}
             header={blurb.title}
             headerColor={defaultColors.primary}
           >
-            {blurb.body && blurb.body.body}
+            {blurb.body?.body}
           </Blurbs.Item>
         ))}
 

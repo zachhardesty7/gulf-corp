@@ -14,13 +14,15 @@ import {
   Segment
 } from 'semantic-ui-react'
 
-import { defaultColors, utils } from '../utils'
+import { applyTag, getColor, process } from '../utils'
 
-const Profile = styled.section`
+const ProfileTagged = applyTag(Card)
+const Profile = styled(ProfileTagged)`
   cursor: pointer;
 `
 
-const ProfileName = styled.h3`
+const ProfileNameTagged = applyTag(Card.Header)
+const ProfileName = styled(ProfileNameTagged)`
   margin-bottom: 0;
 `
 
@@ -39,13 +41,11 @@ const ModalContact = styled.address`
   padding-top: 1.5em;
 
   a {
-    color: ${({ theme }) => theme?.primary || defaultColors.primary};
+    ${getColor('primary')}
     text-decoration: underline;
 
     &:hover {
-      color: ${({ theme }) => theme?.primary || defaultColors.primary};
       filter: brightness(225%);
-      text-decoration: underline;
     }
   }
 `
@@ -61,7 +61,7 @@ const About = ({ data }) => {
 
       <Container text textAlign='justified'>
         <Header as='h1'>{title}</Header>
-        <Header.Content>{subtitle.subtitle}</Header.Content>
+        <Header.Content>{subtitle?.subtitle}</Header.Content>
       </Container>
 
       <Segment vertical padded basic>
@@ -76,16 +76,16 @@ const About = ({ data }) => {
                 // would allow mounting underneath ".root" div instead of document.body
                 as='section'
                 className='root'
-                key={utils.process(card.name)}
+                key={process(card.name)}
                 closeIcon
                 trigger={(
-                  <Card as={Profile}>
+                  <Profile tag='section' link>
                     <ProfileImage fluid={card.image.fluid} />
                     <Card.Content>
-                      <Card.Header as={ProfileName}>{card.name}</Card.Header>
+                      <ProfileName tag='h3'>{card.name}</ProfileName>
                       <Card.Meta as='p'>{card.title}</Card.Meta>
                     </Card.Content>
-                  </Card>
+                  </Profile>
                 )}
               >
                 <Modal.Header as='h2'>
@@ -105,7 +105,7 @@ const About = ({ data }) => {
                     <Grid.Column computer={9} textAlign='justified'>
                       <Modal.Description>
                         {card.bio.content.map(paragraph => (
-                          <p key={utils.process(paragraph.content[0].value.slice(0, 8))}>
+                          <p key={process(paragraph.content[0].value.slice(0, 8))}>
                             {paragraph.content[0].value}
                           </p>
                         ))}
