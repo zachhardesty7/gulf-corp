@@ -3,11 +3,15 @@ import PropTypes from 'prop-types'
 import { graphql } from 'gatsby'
 import GImage from 'gatsby-image'
 
-import styled from 'styled-components'
+import styled, { withTheme } from 'styled-components'
 import { Blurbs, Hero } from 'semantic-styled-ui'
 
-import { defaultColors, toJoinedTitleCase } from '../utils'
+// TODO: add contentful rich parsing:
+// https://www.gatsbyjs.org/packages/@contentful/gatsby-transformer-contentful-richtext
 
+// FIXME: need screenshot of unmodified system
+// https://gatsbyjs.org/docs/adding-images-fonts-files/#adding-images-and-fonts
+// https://www.gatsbyjs.org/docs/static-folder/
 const Slider = styled(Hero)`
   @font-face {
     font-family: 'Franklin Gothic Book';
@@ -41,7 +45,7 @@ const Slider = styled(Hero)`
   }
 `
 
-const Index = ({ data }) => {
+const Index = ({ data, theme }) => {
   const { hero, blurbs } = data.allContentfulIndex.edges[0].node
 
   return (
@@ -49,7 +53,7 @@ const Index = ({ data }) => {
       <Slider
         baseline='top'
         size='relaxed'
-        underline={defaultColors.accent}
+        underline
         title={hero.title}
         subtitle={hero.subtitle}
       >
@@ -58,13 +62,9 @@ const Index = ({ data }) => {
         ))}
       </Slider>
 
-      <Blurbs color={defaultColors.primary}>
+      <Blurbs color={theme.primary}>
         {blurbs.map(blurb => (
-          <Blurbs.Item
-            key={toJoinedTitleCase(blurb.title)}
-            header={blurb.title}
-            headerColor={defaultColors.primary}
-          >
+          <Blurbs.Item key={blurb.title} header={blurb.title}>
             {blurb.body?.body}
           </Blurbs.Item>
         ))}
@@ -75,14 +75,16 @@ const Index = ({ data }) => {
 }
 
 Index.propTypes = {
+  theme: PropTypes.object, // eslint-disable-line react/forbid-prop-types
   data: PropTypes.object // eslint-disable-line react/forbid-prop-types
 }
 
 Index.defaultProps = {
+  theme: {},
   data: {}
 }
 
-export default React.memo(Index)
+export default React.memo(withTheme(Index))
 
 export const pageQuery = graphql`
   query IndexRoute {

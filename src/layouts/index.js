@@ -1,14 +1,18 @@
 import React from 'react'
 import { Helmet } from 'react-helmet'
 import PropTypes from 'prop-types'
-import { Link, StaticQuery, graphql, useStaticQuery } from 'gatsby'
+import { Link, graphql, useStaticQuery } from 'gatsby'
 import GImage from 'gatsby-image'
+import { ThemeProvider, createGlobalStyle } from 'styled-components'
 
-import { createGlobalStyle, ThemeProvider } from 'styled-components'
+import {
+  Footer,
+  Navigation,
+  getColor,
+  getHoverColor,
+  media
+} from 'semantic-styled-ui'
 import 'semantic-ui-css/semantic.min.css'
-
-import { Navigation, Footer } from 'semantic-styled-ui'
-import { getColor, getHoverColor, media } from '../utils'
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -151,7 +155,6 @@ const Template = ({ children }) => {
         {children}
 
         <Footer
-          inverted
           copyright={footer.company}
           separated
           developerName='Zach Hardesty'

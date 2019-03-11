@@ -19,10 +19,10 @@
     "gatsby-plugin-webpack-bundle-analyzer": "^1.0.4",
     "gatsby-source-contentful": "^2.0.32",
     "prop-types": "^15.7.2",
-    "react": "16.8.3",
-    "react-dom": "16.8.3",
+    "react": "16.8.4",
+    "react-dom": "16.8.4",
     "react-helmet": "^5.2.0",
-    "semantic-styled-ui": "^0.2.5",
+    "semantic-styled-ui": "0.2.15",
     "semantic-ui-css": "^2.4.1",
     "semantic-ui-react": "^0.85.0",
     "styled-components": "4.1.3"
@@ -39,11 +39,11 @@
     "eslint-config-standard": "^12.0.0",
     "eslint-plugin-import": "^2.16.0",
     "eslint-plugin-jsx-a11y": "^6.2.1",
+    "eslint-plugin-node": "^8.0.1",
     "eslint-plugin-promise": "^4.0.1",
     "eslint-plugin-react": "^7.12.4",
     "eslint-plugin-react-hooks": "1.2.0",
     "eslint-plugin-standard": "^4.0.0",
-    "purgecss": "^1.1.0",
     "stylelint": "^9.10.1",
     "stylelint-config-recommended": "^2.1.0",
     "stylelint-config-styled-components": "^0.1.1",
@@ -51,11 +51,10 @@
   },
   "license": "MIT",
   "scripts": {
-    "purge": "purgecss --css public/**/*.css --content public/**/*.js --out public/",
     "dev": "gatsby develop",
     "dev:https": "gatsby develop --https",
-    "test": "npm run build && npm run serve",
+    "test": "yarn run build && yarn run serve",
     "serve": "gatsby serve",
-    "build": "gatsby build && npm run purge"
+    "build": "gatsby build && yarn run purge"
   }
 }

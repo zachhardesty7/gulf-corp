@@ -3,25 +3,25 @@ import { Helmet } from 'react-helmet'
 import PropTypes from 'prop-types'
 import { graphql } from 'gatsby'
 import GImage from 'gatsby-image'
-
 import styled from 'styled-components'
+
 import {
-  Modal,
-  Container,
-  Header,
   Card,
+  Container,
   Grid,
+  Header,
+  Modal,
   Segment
 } from 'semantic-ui-react'
 
-import { applyTag, getColor, process } from '../utils'
+import { asTag, getColor } from 'semantic-styled-ui'
 
-const ProfileTagged = applyTag(Card)
+const ProfileTagged = asTag(Card)
 const Profile = styled(ProfileTagged)`
   cursor: pointer;
 `
 
-const ProfileNameTagged = applyTag(Card.Header)
+const ProfileNameTagged = asTag(Card.Header)
 const ProfileName = styled(ProfileNameTagged)`
   margin-bottom: 0;
 `
@@ -76,7 +76,7 @@ const About = ({ data }) => {
                 // would allow mounting underneath ".root" div instead of document.body
                 as='section'
                 className='root'
-                key={process(card.name)}
+                key={card.name}
                 closeIcon
                 trigger={(
                   <Profile tag='section' link>
@@ -105,7 +105,7 @@ const About = ({ data }) => {
                     <Grid.Column computer={9} textAlign='justified'>
                       <Modal.Description>
                         {card.bio.content.map(paragraph => (
-                          <p key={process(paragraph.content[0].value.slice(0, 8))}>
+                          <p key={paragraph.content[0].value.slice(0, 8)}>
                             {paragraph.content[0].value}
                           </p>
                         ))}

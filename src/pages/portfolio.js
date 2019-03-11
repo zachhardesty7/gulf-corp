@@ -5,14 +5,12 @@ import { graphql } from 'gatsby'
 import GImage from 'gatsby-image'
 
 import {
-  Segment,
   Container,
+  Grid,
   Header,
-  Grid
+  Segment
 } from 'semantic-ui-react'
-import { PortfolioItem } from 'semantic-styled-ui'
-
-import { media, process } from '../utils'
+import { PortfolioItem, media } from 'semantic-styled-ui'
 
 const Portfolio = ({ data }) => {
   const { title, pieces } = data.allContentfulPortfolio.edges[0].node
@@ -42,13 +40,13 @@ const Portfolio = ({ data }) => {
           >
             {pieces.map(piece => (
               <PortfolioItem
-                key={process(`${piece.name} ${piece.location}`)}
+                key={`${piece.name} ${piece.location}`}
                 title={piece.name}
                 subtitle={piece.location}
               >
                 <GImage
                   fluid={piece.image.fluid}
-                  alt={process(`${piece.name} ${piece.location}`)}
+                  alt={`${piece.name} ${piece.location}`}
                 />
               </PortfolioItem>
             ))}

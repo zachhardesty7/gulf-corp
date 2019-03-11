@@ -9,13 +9,12 @@ import {
   Header,
   Segment
 } from 'semantic-ui-react'
-import { Form } from 'semantic-styled-ui'
+import { Form, asTag } from 'semantic-styled-ui'
 
 // REVIEW: unsure why bundler is missing this file
 import 'semantic-ui-css/components/input.min.css'
-import { applyTag } from '../utils';
 
-const ContactInfoTagged = applyTag(Header.Content)
+const ContactInfoTagged = asTag(Header.Content)
 const ContactInfo = styled(ContactInfoTagged)`
   padding-top: 2.25em;
 `
