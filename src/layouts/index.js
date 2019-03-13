@@ -19,7 +19,7 @@ const GlobalStyle = createGlobalStyle`
     overflow-y: overlay;
     font-size: 1em;
     line-height: 1.65em;
-    ${getColor('dark')}
+    ${getColor('dark')};
     margin: 0;
   }
 
@@ -33,8 +33,8 @@ const GlobalStyle = createGlobalStyle`
   }
 
   a {
-    ${getColor('secondary')}
-    ${getHoverColor('white')}
+    ${getColor('secondary')};
+    ${getHoverColor('white')};
   }
 
   ${media.desktop`

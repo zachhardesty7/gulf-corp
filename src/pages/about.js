@@ -41,7 +41,7 @@ const ModalContact = styled.address`
   padding-top: 1.5em;
 
   a {
-    ${getColor('primary')}
+    ${getColor('primary')};
     text-decoration: underline;
 
     &:hover {
