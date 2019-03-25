@@ -148,7 +148,7 @@ const Template = ({ children }) => {
           </Navigation.Logo>
 
           {nav.pages.map((page, i) => (
-            <Navigation.Item key={page} tabIndex={i + 1}>{page}</Navigation.Item>
+            <Navigation.Item key={page} tabIndex='0'>{page}</Navigation.Item>
           ))}
         </Navigation>
 
