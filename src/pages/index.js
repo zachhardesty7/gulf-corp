@@ -8,40 +8,23 @@ import { Blurbs, Hero } from 'semantic-styled-ui'
 
 // TODO: add contentful rich parsing:
 // https://www.gatsbyjs.org/packages/@contentful/gatsby-transformer-contentful-richtext
-
-// FIXME: need screenshot of unmodified system
-// https://gatsbyjs.org/docs/adding-images-fonts-files/#adding-images-and-fonts
-// https://www.gatsbyjs.org/docs/static-folder/
 const Slider = styled(Hero)`
-  @font-face {
-    font-family: 'Franklin Gothic Book';
-    /* FIXME: url -> /public/ */
-    src: url('../../static/franklin-gothic-book-regular.ttf') format('truetype');
-    font-weight: bolder;
-    font-display: swap;
-  }
+  &&& {
+    h1 {
+      line-height: 1em;
+      margin-bottom: 0;
+      vertical-align: baseline;
+      font-weight: bolder !important;
+      font-style: italic;
+      font-family: Tahoma, Arial, Helvetica, sans-serif !important;
+    }
 
-  @font-face {
-    font-family: 'Eurostile';
-    font-style: italic;
-    src: url('../../static/eurostile-lt-std-bold-oblique.ttf') format('truetype');
-    font-display: swap;
-  }
-
-  h1 {
-    line-height: 1em;
-    margin-bottom: 0;
-    vertical-align: baseline;
-    font-weight: bolder;
-    font-style: italic;
-    font-family: 'Franklin Gothic Book', Tahoma, Arial, Helvetica, sans-serif !important;
-  }
-
-  h2 {
-    margin-top: 0;
-    font-style: italic;
-    font-weight: normal;
-    font-family: 'Eurostile', Tahoma, Arial, Helvetica, sans-serif !important;
+    h2 {
+      margin-top: 0;
+      font-style: italic;
+      font-weight: normal;
+      font-family: Tahoma, Arial, Helvetica, sans-serif !important;
+    }
   }
 `
 
@@ -65,7 +48,7 @@ const Index = ({ data, theme }) => {
       <Blurbs color={theme.primary}>
         {blurbs.map(blurb => (
           <Blurbs.Item key={blurb.title} header={blurb.title}>
-            {blurb.body?.body}
+            {blurb.body ?.body}
           </Blurbs.Item>
         ))}
 

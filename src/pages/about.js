@@ -17,7 +17,7 @@ import {
 
 import { asTag, getColor } from 'semantic-styled-ui'
 
-// NOTE: necessary due to lack of handling of forwarded refs in SUIR
+// necessary due to lack of handling of forwarded refs in SUIR
 // when rendering a trigger item for Modal (or any Portal)
 const CardTaggedForwardRef = asTag(React.forwardRef(({ children, ...rest }, ref) => (
   <Ref innerRef={ref}>

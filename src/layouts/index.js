@@ -24,7 +24,7 @@ const GlobalStyle = createGlobalStyle`
   }
 
   p {
-    line-height: 1.65em;
+    line-height: 1.65em !important;
   }
 
   img {
@@ -37,6 +37,7 @@ const GlobalStyle = createGlobalStyle`
     ${getHoverColor('white')};
   }
 
+  /* TODO: convert to styled-components if possible */
   ${media.desktop`
     .ui.four.doubling.cards>.card {
       width: calc(30% - 1.5em) !important;
@@ -50,7 +51,6 @@ const GlobalStyle = createGlobalStyle`
   `}
 
   ${media.mobile`
-    /* REVIEW: */
     .ui.container {
       font-size: 1.1rem !important;
       padding-left: 1.5em !important;
