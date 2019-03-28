@@ -6,8 +6,6 @@ import GImage from 'gatsby-image'
 import styled, { withTheme } from 'styled-components'
 import { Blurbs, Hero } from 'semantic-styled-ui'
 
-// TODO: add contentful rich parsing:
-// https://www.gatsbyjs.org/packages/@contentful/gatsby-transformer-contentful-richtext
 const Slider = styled(Hero)`
   &&& {
     h1 {
