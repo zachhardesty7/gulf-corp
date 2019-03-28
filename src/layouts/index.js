@@ -16,7 +16,6 @@ import 'semantic-ui-css/semantic.min.css'
 
 const GlobalStyle = createGlobalStyle`
   body {
-    overflow-y: overlay;
     font-size: 1em;
     line-height: 1.65em;
     ${getColor('dark')};
@@ -37,48 +36,22 @@ const GlobalStyle = createGlobalStyle`
     ${getHoverColor('white')};
   }
 
-  /* TODO: convert to styled-components if possible */
-  ${media.desktop`
-    .ui.four.doubling.cards>.card {
-      width: calc(30% - 1.5em) !important;
-    }
-  `}
-
-  ${media.laptop`
-    .ui.four.doubling.cards>.card {
-      width: calc(40% - 1.5em) !important;
-    }
-  `}
-
   ${media.mobile`
-    .ui.container {
+    /* override bad mobile sizing */
+    .ui.container.ui.container {
       font-size: 1.1rem !important;
       padding-left: 1.5em !important;
       padding-right: 1.5em !important;
       margin-left: auto !important;
       margin-right: auto !important;
     }
-
-    .ui.four.doubling.cards {
-      padding-top: 0.75em !important;
-
-      & > .card {
-        max-width: 20em;
-        margin-left: auto !important;
-        margin-right: auto !important;
-      }
-    }
-
-    .ui.stackable.grid>.column, .ui.container>.ui.stackable.grid>.row>.column {
-      max-width: 375px;
-    }
-  `}
+  `};
 
   ${media.phone`
     .ui.container.text.justified {
       text-align: left !important;
     }
-  `}
+  `};
 `
 
 const Template = ({ children }) => {

@@ -1,7 +1,7 @@
 import React from 'react'
 import { Helmet } from 'react-helmet'
-import PropTypes from 'prop-types'
 import { graphql } from 'gatsby'
+import { richTextToJsx } from '@madebyconnor/rich-text-to-jsx'
 import GImage from 'gatsby-image'
 import styled from 'styled-components'
 
@@ -15,7 +15,13 @@ import {
   Segment
 } from 'semantic-ui-react'
 
-import { asTag, getColor } from 'semantic-styled-ui'
+import { asTag, getColor, media } from 'semantic-styled-ui'
+
+const Profiles = styled(Card.Group)`
+  ${media.mobile`
+    padding-top: 0.75em !important;
+  `};
+`
 
 // necessary due to lack of handling of forwarded refs in SUIR
 // when rendering a trigger item for Modal (or any Portal)
@@ -26,6 +32,20 @@ const CardTaggedForwardRef = asTag(React.forwardRef(({ children, ...rest }, ref)
 )))
 const Profile = styled(CardTaggedForwardRef)`
   cursor: pointer;
+
+  ${media.desktop`
+    width: calc(30% - 1.5em) !important;
+  `};
+
+  ${media.laptop`
+    width: calc(40% - 1.5em) !important;
+  `};
+
+  ${media.mobile`
+    max-width: 20em;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  `};
 `
 
 const ProfileNameTagged = asTag(Card.Header)
@@ -37,6 +57,18 @@ const ProfileImage = styled(GImage)`
   height: 300px;
   object-fit: cover;
   object-position: 50% 40%;
+`
+
+const ModalGrid = styled(Grid)`
+  ${media.mobile`
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+
+    .column {
+      max-width: 400px;
+    }
+  `};
 `
 
 const ModalImage = styled(GImage)`
@@ -58,7 +90,7 @@ const ModalContact = styled.address`
 `
 
 const About = ({ data }) => {
-  const { title, subtitle, cards } = data.allContentfulAbout.edges[0].node
+  const { title, content, cards } = data.allContentfulAbout.edges[0].node
 
   return (
     <Segment as='main' padded vertical basic>
@@ -68,19 +100,17 @@ const About = ({ data }) => {
 
       <Container text textAlign='justified'>
         <Header as='h1'>{title}</Header>
-        <Header.Content>{subtitle?.subtitle}</Header.Content>
+        <Header.Content>{richTextToJsx(content?.json)}</Header.Content>
       </Container>
 
       <Segment vertical padded basic>
         <Container>
-          <Card.Group doubling stackable centered itemsPerRow={4}>
+          <Profiles doubling stackable centered itemsPerRow={4}>
             {cards.map(card => (
               <Modal
                 // impossible to style a modal portalled in
                 // due to .root.root.root overrides
                 // must use semi-hacky extra root class
-                // REVIEW: use "mountNode" prop with passed ref? how to get ref?
-                // would allow mounting underneath ".root" div instead of document.body
                 as='section'
                 className='root'
                 key={card.name}
@@ -101,7 +131,7 @@ const About = ({ data }) => {
                   {card.title}
                 </Modal.Header>
                 <Modal.Content scrolling>
-                  <Grid columns={2} stackable>
+                  <ModalGrid columns={2} stackable>
                     <Grid.Column computer={7} textAlign='left'>
                       <ModalImage centered size='large' fluid={card.image.fluid} />
                       <ModalContact>
@@ -111,32 +141,19 @@ const About = ({ data }) => {
                     </Grid.Column>
                     <Grid.Column computer={9} textAlign='justified'>
                       <Modal.Description>
-                        {card.bio.content.map(paragraph => (
-                          <p key={paragraph.content[0].value.slice(0, 8)}>
-                            {paragraph.content[0].value}
-                          </p>
-                        ))}
+                        {richTextToJsx(card.bio?.json)}
                       </Modal.Description>
                     </Grid.Column>
-                  </Grid>
+                  </ModalGrid>
 
                 </Modal.Content>
               </Modal>
             ))}
-          </Card.Group>
+          </Profiles>
         </Container>
       </Segment>
     </Segment>
   )
-}
-
-About.propTypes = {
-  // REVIEW: defined below...
-  data: PropTypes.object // eslint-disable-line react/forbid-prop-types
-}
-
-About.defaultProps = {
-  data: {}
 }
 
 export default React.memo(About)
@@ -147,18 +164,14 @@ export const pageQuery = graphql`
       edges {
         node {
           title
-          subtitle {
-            subtitle
+          content {
+            json
           }
           cards {
             name
             title
             bio {
-              content {
-                content {
-                  value
-                }
-              }
+              json
             }
             email
             phone

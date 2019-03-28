@@ -1,6 +1,6 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import { graphql } from 'gatsby'
+import { richTextToJsx } from '@madebyconnor/rich-text-to-jsx'
 import GImage from 'gatsby-image'
 
 import styled, { withTheme } from 'styled-components'
@@ -48,23 +48,13 @@ const Index = ({ data, theme }) => {
       <Blurbs color={theme.primary}>
         {blurbs.map(blurb => (
           <Blurbs.Item key={blurb.title} header={blurb.title}>
-            {blurb.body ?.body}
+            {richTextToJsx(blurb.content?.json)}
           </Blurbs.Item>
         ))}
 
       </Blurbs>
     </main>
   )
-}
-
-Index.propTypes = {
-  theme: PropTypes.object, // eslint-disable-line react/forbid-prop-types
-  data: PropTypes.object // eslint-disable-line react/forbid-prop-types
-}
-
-Index.defaultProps = {
-  theme: {},
-  data: {}
 }
 
 export default React.memo(withTheme(Index))
@@ -86,8 +76,8 @@ export const pageQuery = graphql`
           }
           blurbs {
             title
-            body {
-              body
+            content {
+              json
             }
           }
         }

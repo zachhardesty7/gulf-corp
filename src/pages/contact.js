@@ -1,6 +1,5 @@
 import React from 'react'
 import { Helmet } from 'react-helmet'
-import PropTypes from 'prop-types'
 import { graphql } from 'gatsby'
 import styled from 'styled-components'
 
@@ -10,9 +9,6 @@ import {
   Segment
 } from 'semantic-ui-react'
 import { Form, asTag } from 'semantic-styled-ui'
-
-// REVIEW: unsure why bundler is missing this file
-import 'semantic-ui-css/components/input.min.css'
 
 const ContactInfoTagged = asTag(Header.Content)
 const ContactInfo = styled(ContactInfoTagged)`
@@ -46,14 +42,6 @@ const Contact = ({ data }) => {
       </Container>
     </Segment>
   )
-}
-
-Contact.propTypes = {
-  data: PropTypes.object // eslint-disable-line react/forbid-prop-types
-}
-
-Contact.defaultProps = {
-  data: {}
 }
 
 export default React.memo(Contact)

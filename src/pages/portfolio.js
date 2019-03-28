@@ -1,6 +1,5 @@
 import React from 'react'
 import { Helmet } from 'react-helmet'
-import PropTypes from 'prop-types'
 import { graphql } from 'gatsby'
 import GImage from 'gatsby-image'
 
@@ -55,14 +54,6 @@ const Portfolio = ({ data }) => {
       </Segment>
     </Segment>
   )
-}
-
-Portfolio.propTypes = {
-  data: PropTypes.object // eslint-disable-line react/forbid-prop-types
-}
-
-Portfolio.defaultProps = {
-  data: {}
 }
 
 export default React.memo(Portfolio)
