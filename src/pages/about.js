@@ -18,9 +18,9 @@ import {
 import { asTag, getColor, media } from 'semantic-styled-ui'
 
 const Profiles = styled(Card.Group)`
-  ${media.mobile`
+  @media ${media.mobile} {
     padding-top: 0.75em !important;
-  `};
+  }
 `
 
 // necessary due to lack of handling of forwarded refs in SUIR
@@ -33,19 +33,19 @@ const CardTaggedForwardRef = asTag(React.forwardRef(({ children, ...rest }, ref)
 const Profile = styled(CardTaggedForwardRef)`
   cursor: pointer;
 
-  ${media.desktop`
+  @media ${media.desktop} {
     width: calc(30% - 1.5em) !important;
-  `};
+  }
 
-  ${media.laptop`
+  @media ${media.laptop} {
     width: calc(40% - 1.5em) !important;
-  `};
+  }
 
-  ${media.mobile`
+  @media ${media.mobile} {
     max-width: 20em;
     margin-left: auto !important;
     margin-right: auto !important;
-  `};
+  }
 `
 
 const ProfileNameTagged = asTag(Card.Header)
@@ -60,7 +60,7 @@ const ProfileImage = styled(GImage)`
 `
 
 const ModalGrid = styled(Grid)`
-  ${media.mobile`
+  @media ${media.mobile} {
     display: flex;
     flex-direction: column;
     align-content: center;
@@ -68,7 +68,7 @@ const ModalGrid = styled(Grid)`
     .column {
       max-width: 400px;
     }
-  `};
+  }
 `
 
 const ModalImage = styled(GImage)`

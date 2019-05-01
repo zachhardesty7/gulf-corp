@@ -36,7 +36,7 @@ const GlobalStyle = createGlobalStyle`
     ${getHoverColor('white')};
   }
 
-  ${media.mobile`
+  @media ${media.mobile} {
     /* override bad mobile sizing */
     .ui.container.ui.container {
       font-size: 1.1rem !important;
@@ -45,13 +45,13 @@ const GlobalStyle = createGlobalStyle`
       margin-left: auto !important;
       margin-right: auto !important;
     }
-  `};
+  }
 
-  ${media.phone`
+  @media ${media.phone} {
     .ui.container.text.justified {
       text-align: left !important;
     }
-  `};
+  }
 `
 
 const Template = ({ children }) => {

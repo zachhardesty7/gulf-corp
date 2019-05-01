@@ -7,6 +7,7 @@ module.exports = {
         modules: false,
         useBuiltIns: 'usage',
         shippedProposals: true,
+        corejs: 2,
         targets: {
           browsers: [
             '>0.25%',
@@ -47,6 +48,7 @@ module.exports = {
     [
       '@babel/plugin-transform-runtime',
       {
+        corejs: 2,
         helpers: true,
         regenerator: true
       }

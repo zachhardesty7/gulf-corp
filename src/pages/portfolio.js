@@ -22,9 +22,9 @@ const Portfolio = ({ data }) => {
 
       <Container
         css={`
-          ${media.mobile`
+          @media ${media.mobile} {
             max-width: calc(375px + 3em) !important;
-          `}
+          }
         `}
       >
         <Header as='h1'>{title}</Header>
