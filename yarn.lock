@@ -11012,10 +11012,10 @@ selfsigned@^1.10.4:
   dependencies:
     node-forge "0.7.5"
 
-semantic-styled-ui@0.5.7:
-  version "0.5.7"
-  resolved "https://registry.yarnpkg.com/semantic-styled-ui/-/semantic-styled-ui-0.5.7.tgz#798e42ecc9c1a9516db88ecdbb5d8ba8cb83ed11"
-  integrity sha512-oDMPWReZRorDuW4Tiq1YT1yfuX40UE74VsGPWxaexuinxYA1tzAh+pyl9cj1EpPw5dCFavgNew4Z+Sb+X2BZzA==
+semantic-styled-ui@0.5.8:
+  version "0.5.8"
+  resolved "https://registry.yarnpkg.com/semantic-styled-ui/-/semantic-styled-ui-0.5.8.tgz#de0a53ff0bb75a2a2f24ac280245e7853245346e"
+  integrity sha512-vjoGnahKyHP5hrn3DI4rKwf/XdViPIIokUYRUXSOd8bS6NtRDvaNtA2x4nuPneor19m8JGyP48gt7dQh4z8LaA==
   dependencies:
     "@babel/runtime-corejs3" "^7.4.4"
     core-js "^3.0.1"
