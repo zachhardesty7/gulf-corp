@@ -36,6 +36,7 @@ const TenantRelationships = ({ data }) => {
             columns={3}
             stackable
             doubling
+            relaxed='very'
           >
             {brands.map(brand => (
               <PortfolioItem fill={false} key={brand.name}>
