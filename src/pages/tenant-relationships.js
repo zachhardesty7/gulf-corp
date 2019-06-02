@@ -40,12 +40,12 @@ const TenantRelationships = ({ data }) => {
             relaxed
           >
             {brands.map(({ name, image }) => (
-              <S.PortfolioItem fill={false} key={name}>
+              <PortfolioItem fill={false} key={name}>
                 <GImage
                   fluid={image.fluid}
                   alt={name}
                 />
-              </S.PortfolioItem>
+              </PortfolioItem>
             ))}
           </Grid>
         </Container>

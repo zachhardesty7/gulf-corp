@@ -38,6 +38,7 @@ module.exports = {
         cssNamespace: '.root.root.root'
       }
     ],
+    '@babel/plugin-syntax-dynamic-import',
     [
       '@babel/plugin-proposal-class-properties',
       {
