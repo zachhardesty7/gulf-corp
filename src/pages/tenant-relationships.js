@@ -21,6 +21,7 @@ const TenantRelationships = ({ data }) => {
       </Helmet>
 
       <Container
+        // REVIEW: usage in 4 column grid
         css={`
           @media ${media.mobile} {
             max-width: calc(375px + 3em) !important;
@@ -33,18 +34,18 @@ const TenantRelationships = ({ data }) => {
         <Container>
           <Grid
             textAlign='center'
-            columns={3}
+            columns={4}
             stackable
             doubling
-            relaxed='very'
+            relaxed
           >
-            {brands.map(brand => (
-              <PortfolioItem fill={false} key={brand.name}>
+            {brands.map(({ name, image }) => (
+              <S.PortfolioItem fill={false} key={name}>
                 <GImage
-                  fluid={brand.image.fluid}
-                  alt={brand.name}
+                  fluid={image.fluid}
+                  alt={name}
                 />
-              </PortfolioItem>
+              </S.PortfolioItem>
             ))}
           </Grid>
         </Container>
@@ -64,7 +65,8 @@ export const pageQuery = graphql`
           brands {
             name
             image {
-              fluid(maxWidth: 500) {
+              # resizing behaviour necessary for setting both maxes
+              fluid(maxWidth: 500, maxHeight: 250, resizingBehavior: PAD) {
                 ...GatsbyContentfulFluid_withWebp
               }
             }

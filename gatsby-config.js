@@ -44,7 +44,8 @@ module.exports = {
     {
       resolve: 'gatsby-plugin-webpack-bundle-analyzer',
       options: {
-        production: true
+        openAnalyzer: false
+        // production: true
       }
     },
     'gatsby-plugin-react-helmet',

@@ -43,15 +43,6 @@ module.exports = {
       {
         loose: true
       }
-    ],
-    '@babel/plugin-syntax-dynamic-import',
-    [
-      '@babel/plugin-transform-runtime',
-      {
-        corejs: 2,
-        helpers: true,
-        regenerator: true
-      }
     ]
   ]
 }
