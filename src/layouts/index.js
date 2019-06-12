@@ -115,12 +115,12 @@ const Template = ({ children }) => {
         </Helmet>
 
         <GlobalStyle />
-        <Navigation size='large' tag={Link}>
+        <Navigation size='large' as={Link}>
           <Navigation.Logo stacked tabIndex='0'>
             <GImage fixed={nav.image.fixed} alt='logo' />
           </Navigation.Logo>
 
-          {nav.pages.map((page, i) => (
+          {nav.pages.map(page => (
             <Navigation.Item key={page} tabIndex='0'>{page}</Navigation.Item>
           ))}
         </Navigation>
@@ -140,10 +140,6 @@ const Template = ({ children }) => {
 
 Template.propTypes = {
   children: PropTypes.node
-}
-
-Template.defaultProps = {
-  children: null
 }
 
 export default React.memo(Template)

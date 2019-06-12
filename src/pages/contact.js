@@ -8,10 +8,9 @@ import {
   Header,
   Segment
 } from 'semantic-ui-react'
-import { Form, asTag } from 'semantic-styled-ui'
+import { Form } from 'semantic-styled-ui'
 
-const ContactInfoTagged = asTag(Header.Content)
-const ContactInfo = styled(ContactInfoTagged)`
+const ContactInfo = styled(Header.Content)`
   padding-top: 2.25em;
 `
 
@@ -34,7 +33,7 @@ const Contact = ({ data }) => {
           textArea={form.textArea}
           button={form.button}
         />
-        <ContactInfo tag='address'>
+        <ContactInfo forwardedAs='address'>
           <p>{address.split('|')[0]}</p>
           <p>{address.split('|')[1]}</p>
           <p>{phone}</p>

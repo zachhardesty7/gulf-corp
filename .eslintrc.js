@@ -37,6 +37,14 @@ module.exports = {
         ]
       }
     ],
+    'react/jsx-indent': [
+      'warn',
+      2,
+      {
+        checkAttributes: true,
+        indentLogicalExpressions: true
+      }
+    ],
     'jsx-quotes': [
       'error',
       'prefer-single'
@@ -44,9 +52,9 @@ module.exports = {
     'standard/array-bracket-even-spacing': 'off',
     'standard/computed-property-even-spacing': 'off',
     'standard/object-curly-even-spacing': 'off',
+    'no-console': 'off',
     'import/prefer-default-export': 'off',
     'import/namespace': 'error',
-    'no-console': 'off',
     'sort-imports': [
       'warn',
       {
@@ -59,3 +67,4 @@ module.exports = {
     ]
   }
 }
+ 

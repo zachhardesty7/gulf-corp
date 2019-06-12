@@ -12,7 +12,7 @@ import {
 import { PortfolioItem, media } from 'semantic-styled-ui'
 
 const Portfolio = ({ data }) => {
-  const { title, pieces } = data.allContentfulPortfolio.edges[0].node
+  const { title, pieces } = data.allContentfulPortfolio.nodes[0]
 
   return (
     <Segment as='main' padded vertical basic>
@@ -61,16 +61,14 @@ export default React.memo(Portfolio)
 export const pageQuery = graphql`
   query PortfolioRoute {
     allContentfulPortfolio(sort: { fields: [contentful_id] }) {
-      edges {
-        node {
-          title
-          pieces {
-            name
-            location
-            image {
-              fluid(maxWidth: 500) {
-                ...GatsbyContentfulFluid_withWebp
-              }
+      nodes {
+        title
+        pieces {
+          name
+          location
+          image {
+            fluid(maxWidth: 500) {
+              ...GatsbyContentfulFluid_withWebp
             }
           }
         }

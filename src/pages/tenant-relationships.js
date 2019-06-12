@@ -12,7 +12,7 @@ import {
 import { PortfolioItem, media } from 'semantic-styled-ui'
 
 const TenantRelationships = ({ data }) => {
-  const { title, brands } = data.allContentfulTenantRelationships.edges[0].node
+  const { title, brands } = data.allContentfulTenantRelationships.nodes[0]
 
   return (
     <Segment as='main' padded vertical basic>
@@ -59,16 +59,14 @@ export default React.memo(TenantRelationships)
 export const pageQuery = graphql`
   query TenantRelationshipsRoute {
     allContentfulTenantRelationships(sort: { fields: [contentful_id] }) {
-      edges {
-        node {
-          title
-          brands {
-            name
-            image {
-              # resizing behaviour necessary for setting both maxes
-              fluid(maxWidth: 500, maxHeight: 250, resizingBehavior: PAD) {
-                ...GatsbyContentfulFluid_withWebp
-              }
+      nodes {
+        title
+        brands {
+          name
+          image {
+            # resizing behaviour necessary for setting both maxes
+            fluid(maxWidth: 500, maxHeight: 250, resizingBehavior: PAD) {
+              ...GatsbyContentfulFluid_withWebp
             }
           }
         }

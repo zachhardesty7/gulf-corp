@@ -15,7 +15,7 @@ import {
   Segment
 } from 'semantic-ui-react'
 
-import { asTag, getColor, media } from 'semantic-styled-ui'
+import { getColor, media } from 'semantic-styled-ui'
 
 const Profiles = styled(Card.Group)`
   @media ${media.mobile} {
@@ -25,11 +25,11 @@ const Profiles = styled(Card.Group)`
 
 // necessary due to lack of handling of forwarded refs in SUIR
 // when rendering a trigger item for Modal (or any Portal)
-const CardTaggedForwardRef = asTag(React.forwardRef(({ children, ...rest }, ref) => (
+const CardTaggedForwardRef = React.forwardRef(({ children, ...rest }, ref) => (
   <Ref innerRef={ref}>
     <Card {...rest}>{children}</Card>
   </Ref>
-)))
+))
 const Profile = styled(CardTaggedForwardRef)`
   cursor: pointer;
 
@@ -48,8 +48,7 @@ const Profile = styled(CardTaggedForwardRef)`
   }
 `
 
-const ProfileNameTagged = asTag(Card.Header)
-const ProfileName = styled(ProfileNameTagged)`
+const ProfileName = styled(Card.Header)`
   margin-bottom: 0;
 `
 
@@ -116,10 +115,10 @@ const About = ({ data }) => {
                 key={card.name}
                 closeIcon
                 trigger={(
-                  <Profile tag='section' link>
+                  <Profile forwardedAs='section' link>
                     <ProfileImage fluid={card.image.fluid} />
                     <Card.Content>
-                      <ProfileName tag='h3'>{card.name}</ProfileName>
+                      <ProfileName forwardedAs='h3'>{card.name}</ProfileName>
                       <Card.Meta as='p'>{card.title}</Card.Meta>
                     </Card.Content>
                   </Profile>
