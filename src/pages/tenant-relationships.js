@@ -42,6 +42,12 @@ const TenantRelationships = ({ data }) => {
             {brands.map(({ name, image }) => (
               <PortfolioItem fill={false} key={name}>
                 <GImage
+                  style={{ maxHeight: '125px' }}
+                  imgStyle={{ objectFit: 'contain' }}
+                  placeholderStyle={{
+                    maxHeight: '125px',
+                    objectFit: 'contain'
+                  }}
                   fluid={image.fluid}
                   alt={name}
                 />
@@ -65,7 +71,7 @@ export const pageQuery = graphql`
           name
           image {
             # resizing behaviour necessary for setting both maxes
-            fluid(maxWidth: 500, maxHeight: 250, resizingBehavior: PAD) {
+            fluid(maxWidth: 500) {
               ...GatsbyContentfulFluid_withWebp
             }
           }
