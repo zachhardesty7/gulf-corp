@@ -1,7 +1,7 @@
 import React from 'react'
 import { Helmet } from 'react-helmet'
 import { graphql } from 'gatsby'
-import GImage from 'gatsby-image'
+import { richTextToJsx } from '@madebyconnor/rich-text-to-jsx'
 
 import {
 	Container,
@@ -9,9 +9,9 @@ import {
 	Header,
 	Segment,
 } from 'semantic-ui-react'
-import { PortfolioItem, media } from 'semantic-styled-ui'
+import { media } from 'semantic-styled-ui'
 
-const Portfolio = ({ data }) => {
+const Services = ({ data }) => {
 	const { title, body, content } = data.contentfulPage
 
 	return (
@@ -37,17 +37,14 @@ const Portfolio = ({ data }) => {
 						stackable
 						doubling
 					>
-						{content.map(({ name, location, image }) => (
-							<PortfolioItem
-								key={`${name}-${location}`}
-								title={name}
-								subtitle={location}
-							>
-								<GImage
-									fluid={image.fluid}
-									alt={`${name}, ${location}`}
-								/>
-							</PortfolioItem>
+						{content.map(({
+							title: contentTitle,
+							content: contentBody,
+						}) => (
+							<div>
+								{contentTitle}
+								{richTextToJsx(contentBody?.json)}
+							</div>
 						))}
 					</Grid>
 				</Container>
@@ -56,23 +53,20 @@ const Portfolio = ({ data }) => {
 	)
 }
 
-export default React.memo(Portfolio)
+export default React.memo(Services)
 
 export const pageQuery = graphql`
 	query {
-		contentfulPage(title: {eq: "Our Work"}) {
+		contentfulPage(title: { eq: "Our Services" }) {
 			title
 			body {
 				json
 			}
-    	content {
-      	... on ContentfulPiece {
-					name
-					location
-					image {
-						fluid(maxWidth: 500) {
-							...GatsbyContentfulFluid_withWebp
-						}
+			content {
+				...on ContentfulService {
+					title
+					content {
+						json
 					}
 				}
 			}

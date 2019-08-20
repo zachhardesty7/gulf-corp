@@ -56,33 +56,25 @@ const GlobalStyle = createGlobalStyle`
 
 const Template = ({ children }) => {
 	const data = useStaticQuery(graphql`
-		query RouteTemplate {
-			allContentfulNavigation(sort: {fields: [contentful_id]}) {
-				edges {
-					node {
-						image {
-							title
-							fixed(width: 215) {
-								...GatsbyContentfulFixed_withWebp
-							}
-						}
-						pages
+		query {
+			navigation: contentfulNavigation {
+				logo {
+					title
+					fixed(width: 215) {
+						...GatsbyContentfulFixed_withWebp
 					}
+				}
+				pages {
+					title
 				}
 			}
-
-			allContentfulFooter(sort: {fields: [contentful_id]}) {
-				edges {
-					node {
-						company
-					}
-				}
+			footer: contentfulFooter {
+				company
 			}
 		}
 	`)
 
-	const nav = data.allContentfulNavigation.edges[0].node
-	const footer = data.allContentfulFooter.edges[0].node
+	const { navigation, footer } = data
 
 	const gulfColors = {
 		blue: '#172749',
@@ -117,11 +109,11 @@ const Template = ({ children }) => {
 				<GlobalStyle />
 				<Navigation size='large' as={Link}>
 					<Navigation.Logo stacked tabIndex='0'>
-						<GImage fixed={nav.image.fixed} alt='logo' />
+						<GImage fixed={navigation.logo.fixed} alt='logo' />
 					</Navigation.Logo>
 
-					{nav.pages.map(page => (
-						<Navigation.Item key={page} tabIndex='0'>{page}</Navigation.Item>
+					{navigation.pages.map(({ title }) => (
+						<Navigation.Item key={title} tabIndex='0'>{title}</Navigation.Item>
 					))}
 				</Navigation>
 

@@ -89,62 +89,63 @@ const ModalContact = styled.address`
 `
 
 const About = ({ data }) => {
-	const { title, content, cards } = data.allContentfulAbout.edges[0].node
+	const { title, body, content } = data.contentfulPage
 
 	return (
 		<Segment as='main' padded vertical basic>
 			<Helmet>
-				<title>About</title>
+				<title>{title}</title>
 			</Helmet>
 
 			<Container text textAlign='justified'>
 				<Header as='h1'>{title}</Header>
-				<Header.Content>{richTextToJsx(content?.json)}</Header.Content>
+				<Header.Content>{richTextToJsx(body?.json)}</Header.Content>
 			</Container>
 
 			<Segment vertical padded basic>
 				<Container>
 					<Profiles doubling stackable centered itemsPerRow={4}>
-						{cards.map(card => (
+						{content.map(({
+							name, title: job, bio, email, phone, image,
+						}) => (
 							<Modal
 								// impossible to style a modal portalled in
 								// due to .root.root.root overrides
 								// must use semi-hacky extra root class
 								as='section'
 								className='root'
-								key={card.name}
+								key={name}
 								closeIcon
 								trigger={(
 									<Profile forwardedAs='section' link>
-										<ProfileImage fluid={card.image.fluid} />
+										<ProfileImage fluid={image.fluid} />
 										<Card.Content>
-											<ProfileName forwardedAs='h3'>{card.name}</ProfileName>
-											<Card.Meta as='p'>{card.title}</Card.Meta>
+											<ProfileName forwardedAs='h3'>{name}</ProfileName>
+											<Card.Meta as='p'>{job}</Card.Meta>
 										</Card.Content>
 									</Profile>
 								)}
 							>
 								<Modal.Header as='h2'>
-									{card.name}
+									{name}
 									<br />
-									{card.title}
+									{job}
 								</Modal.Header>
 								<Modal.Content scrolling>
 									<ModalGrid columns={2} stackable>
 										<Grid.Column computer={7} textAlign='left'>
-											<ModalImage centered size='large' fluid={card.image.fluid} />
+											<ModalImage centered size='large' fluid={image.fluid} />
 											<ModalContact>
-												<p>{card.phone}</p>
-												<a href={`mailto:${card.email}`}>{card.email}</a>
+												<p>{phone}</p>
+												<a href={`mailto:${email}`}>{email}</a>
 											</ModalContact>
 										</Grid.Column>
 										<Grid.Column computer={9} textAlign='justified'>
 											<Modal.Description>
-												{richTextToJsx(card.bio?.json)}
+												{richTextToJsx(bio?.json)}
 											</Modal.Description>
 										</Grid.Column>
 									</ModalGrid>
-
 								</Modal.Content>
 							</Modal>
 						))}
@@ -158,27 +159,25 @@ const About = ({ data }) => {
 export default React.memo(About)
 
 export const pageQuery = graphql`
-	query AboutRoute {
-		allContentfulAbout(sort: { fields: [contentful_id] }) {
-			edges {
-				node {
+	query {
+		contentfulPage(title: {eq: "About Us"}) {
+			title
+			body {
+				json
+			}
+			content {
+      	... on ContentfulCard {
+					name
 					title
-					content {
+					bio {
 						json
 					}
-					cards {
-						name
+					email
+					phone
+					image {
 						title
-						bio {
-							json
-						}
-						email
-						phone
-						image {
-							title
-							fluid(maxWidth: 500) {
-								...GatsbyContentfulFluid_withWebp
-							}
+						fluid(maxWidth: 500) {
+							...GatsbyContentfulFluid_withWebp
 						}
 					}
 				}

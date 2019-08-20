@@ -1,6 +1,7 @@
 import React from 'react'
 import { Helmet } from 'react-helmet'
 import { graphql } from 'gatsby'
+import { richTextToJsx } from '@madebyconnor/rich-text-to-jsx'
 import styled from 'styled-components'
 
 import {
@@ -15,28 +16,26 @@ const ContactInfo = styled(Header.Content)`
 `
 
 const Contact = ({ data }) => {
-	const {
-		title, form, address, phone,
-	} = data.allContentfulContact.edges[0].node
+	const { title, body, content } = data.contentfulPage
+
+	console.log(data)
 
 	return (
 		<Segment as='main' padded vertical basic>
 			<Helmet>
-				<title>Contact</title>
+				<title>{title}</title>
 			</Helmet>
 
 			<Container text>
 				<Header as='h1'>{title}</Header>
 				<Form
-					name={form.name}
-					fields={form.inputs}
-					textArea={form.textArea}
-					button={form.button}
+					name={content[0]?.name}
+					fields={content[0]?.inputs}
+					textArea={content[0]?.textArea}
+					button={content[0]?.button}
 				/>
 				<ContactInfo forwardedAs='address'>
-					<p>{address.split('|')[0]}</p>
-					<p>{address.split('|')[1]}</p>
-					<p>{phone}</p>
+					{richTextToJsx(content[0]?.info?.json)}
 				</ContactInfo>
 			</Container>
 		</Segment>
@@ -46,17 +45,20 @@ const Contact = ({ data }) => {
 export default React.memo(Contact)
 
 export const pageQuery = graphql`
-	query ContactRoute {
-		allContentfulContact(sort: { fields: [contentful_id] }) {
-			edges {
-				node {
-					title
-					address
-					phone
-					form {
-						name
-						inputs
-						textArea
+	query {
+		contentfulPage(title: {eq: "Contact Us"}) {
+			title
+			body {
+      	id
+    	}
+			content {
+				... on ContentfulForm {
+					name
+					inputs
+					textArea
+					button
+					info {
+						json
 					}
 				}
 			}

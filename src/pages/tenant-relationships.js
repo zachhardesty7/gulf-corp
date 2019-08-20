@@ -12,12 +12,12 @@ import {
 import { PortfolioItem, media } from 'semantic-styled-ui'
 
 const TenantRelationships = ({ data }) => {
-	const { title, brands } = data.allContentfulTenantRelationships.nodes[0]
+	const { title, body, content } = data.contentfulPage
 
 	return (
 		<Segment as='main' padded vertical basic>
 			<Helmet>
-				<title>Tenant Relationships</title>
+				<title>{title}</title>
 			</Helmet>
 
 			<Container
@@ -39,7 +39,7 @@ const TenantRelationships = ({ data }) => {
 						doubling
 						relaxed
 					>
-						{brands.map(({ name, image }) => (
+						{content.map(({ name, image }) => (
 							<PortfolioItem fill={false} key={name}>
 								<GImage
 									style={{ maxHeight: '125px' }}
@@ -63,11 +63,14 @@ const TenantRelationships = ({ data }) => {
 export default React.memo(TenantRelationships)
 
 export const pageQuery = graphql`
-	query TenantRelationshipsRoute {
-		allContentfulTenantRelationships(sort: { fields: [contentful_id] }) {
-			nodes {
-				title
-				brands {
+	query {
+		contentfulPage(title: {eq: "Tenant Relationships"}) {
+			title
+			body {
+				json
+			}
+    	content {
+      	... on ContentfulBrand {
 					name
 					image {
 						# resizing behavior necessary for setting both maxes

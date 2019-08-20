@@ -27,7 +27,7 @@ const Slider = styled(Hero)`
 `
 
 const Index = ({ data, theme }) => {
-	const { hero, blurbs } = data.allContentfulIndex.edges[0].node
+	const { hero, blurbs } = data.contentfulIndex
 
 	return (
 		<main>
@@ -58,26 +58,22 @@ const Index = ({ data, theme }) => {
 export default React.memo(withTheme(Index))
 
 export const pageQuery = graphql`
-	query IndexRoute {
-		allContentfulIndex(sort: {fields: [contentful_id]}) {
-			edges {
-				node {
-					hero {
-						title
-						subtitle
-						backgrounds {
-							title
-							fluid(maxWidth: 1920) {
-								...GatsbyContentfulFluid_withWebp
-							}
-						}
+	query {
+		contentfulIndex {
+			hero {
+				title
+				subtitle
+				backgrounds {
+					title
+					fluid(maxWidth: 1920) {
+						...GatsbyContentfulFluid_withWebp
 					}
-					blurbs {
-						title
-						content {
-							json
-						}
-					}
+				}
+			}
+			blurbs {
+				title
+				content {
+					json
 				}
 			}
 		}
