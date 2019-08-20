@@ -48,11 +48,12 @@
   },
   "license": "MIT",
   "scripts": {
-    "dev:f": "rimraf ./.cache ./public && gatsby develop",
-    "dev": "gatsby develop",
+    "dev:f": "yarn clean && yarn start",
+    "dev": "yarn start",
+    "clean": "rimraf ./.cache ./public",
     "start": "gatsby develop",
     "dev:https": "gatsby develop --https",
-    "test": "yarn run build && yarn run serve",
+    "test": "yarn build && yarn serve",
     "serve": "gatsby serve",
     "build": "gatsby build"
   }
