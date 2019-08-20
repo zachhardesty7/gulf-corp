@@ -1,6 +1,7 @@
 import React from 'react'
 import { Helmet } from 'react-helmet'
 import { graphql } from 'gatsby'
+import { richTextToJsx } from '@madebyconnor/rich-text-to-jsx'
 import GImage from 'gatsby-image'
 
 import {
@@ -21,6 +22,7 @@ const Portfolio = ({ data }) => {
 			</Helmet>
 
 			<Container
+				textAlign='left'
 				css={`
 					@media ${media.mobile} {
 						max-width: calc(375px + 3em) !important;
@@ -28,6 +30,7 @@ const Portfolio = ({ data }) => {
 				`}
 			>
 				<Header as='h1'>{title}</Header>
+				<Header.Content>{richTextToJsx(body?.json)}</Header.Content>
 			</Container>
 			<Segment padded vertical basic>
 				<Container>

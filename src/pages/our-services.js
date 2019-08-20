@@ -9,7 +9,6 @@ import {
 	Header,
 	Segment,
 } from 'semantic-ui-react'
-import { media } from 'semantic-styled-ui'
 
 const Services = ({ data }) => {
 	const { title, body, content } = data.contentfulPage
@@ -20,17 +19,13 @@ const Services = ({ data }) => {
 				<title>{title}</title>
 			</Helmet>
 
-			<Container
-				css={`
-					@media ${media.mobile} {
-						max-width: calc(375px + 3em) !important;
-					}
-				`}
-			>
+			<Container text textAlign='justified'>
 				<Header as='h1'>{title}</Header>
+				<Header.Content>{richTextToJsx(body?.json)}</Header.Content>
 			</Container>
+
 			<Segment padded vertical basic>
-				<Container>
+				<Container text>
 					<Grid
 						textAlign='center'
 						columns={3}

@@ -18,16 +18,18 @@ const ContactInfo = styled(Header.Content)`
 const Contact = ({ data }) => {
 	const { title, body, content } = data.contentfulPage
 
-	console.log(data)
-
 	return (
 		<Segment as='main' padded vertical basic>
 			<Helmet>
 				<title>{title}</title>
 			</Helmet>
 
-			<Container text>
+			<Container text textAlign='justified'>
 				<Header as='h1'>{title}</Header>
+				<Header.Content>{richTextToJsx(body ?.json)}</Header.Content>
+			</Container>
+
+			<Container text>
 				<Form
 					name={content[0]?.name}
 					fields={content[0]?.inputs}

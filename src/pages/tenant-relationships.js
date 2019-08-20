@@ -1,6 +1,7 @@
 import React from 'react'
 import { Helmet } from 'react-helmet'
 import { graphql } from 'gatsby'
+import { richTextToJsx } from '@madebyconnor/rich-text-to-jsx'
 import GImage from 'gatsby-image'
 
 import {
@@ -19,8 +20,8 @@ const TenantRelationships = ({ data }) => {
 			<Helmet>
 				<title>{title}</title>
 			</Helmet>
-
 			<Container
+				textAlign='left'
 				// REVIEW: usage in 4 column grid
 				css={`
 					@media ${media.mobile} {
@@ -29,6 +30,7 @@ const TenantRelationships = ({ data }) => {
 				`}
 			>
 				<Header as='h1'>{title}</Header>
+				<Header.Content>{richTextToJsx(body?.json)}</Header.Content>
 			</Container>
 			<Segment padded vertical basic>
 				<Container>
