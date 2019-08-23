@@ -49,7 +49,6 @@ const Index = ({ data, theme }) => {
 						{richTextToJsx(blurb.content?.json)}
 					</Blurbs.Item>
 				))}
-
 			</Blurbs>
 		</main>
 	)
@@ -78,4 +77,13 @@ export const pageQuery = graphql`
 			}
 		}
 	}
+`
+
+export const pageFragment = graphql`
+  fragment PageFragment on ContentfulPage {
+		title
+		body {
+			json
+		}
+  }
 `

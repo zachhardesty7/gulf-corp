@@ -64,10 +64,7 @@ export default React.memo(Portfolio)
 export const pageQuery = graphql`
 	query {
 		contentfulPage(title: {eq: "Our Work"}) {
-			title
-			body {
-				json
-			}
+			...PageFragment
     	content {
       	... on ContentfulPiece {
 					name

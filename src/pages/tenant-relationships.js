@@ -67,10 +67,7 @@ export default React.memo(TenantRelationships)
 export const pageQuery = graphql`
 	query {
 		contentfulPage(title: {eq: "Tenant Relationships"}) {
-			title
-			body {
-				json
-			}
+			...PageFragment
     	content {
       	... on ContentfulBrand {
 					name

@@ -26,7 +26,7 @@ const Contact = ({ data }) => {
 
 			<Container text textAlign='justified'>
 				<Header as='h1'>{title}</Header>
-				<Header.Content>{richTextToJsx(body ?.json)}</Header.Content>
+				<Header.Content>{richTextToJsx(body?.json)}</Header.Content>
 			</Container>
 
 			<Container text>
@@ -49,10 +49,7 @@ export default React.memo(Contact)
 export const pageQuery = graphql`
 	query {
 		contentfulPage(title: {eq: "Contact Us"}) {
-			title
-			body {
-      	id
-    	}
+			...PageFragment
 			content {
 				... on ContentfulForm {
 					name

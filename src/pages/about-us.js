@@ -161,10 +161,7 @@ export default React.memo(About)
 export const pageQuery = graphql`
 	query {
 		contentfulPage(title: {eq: "About Us"}) {
-			title
-			body {
-				json
-			}
+			...PageFragment
 			content {
       	... on ContentfulCard {
 					name
