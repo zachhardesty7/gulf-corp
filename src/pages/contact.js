@@ -16,16 +16,16 @@ const ContactInfo = styled(Header.Content)`
 `
 
 const Contact = ({ data }) => {
-	const { title, body, content } = data.contentfulPage
+	const { header, body, content } = data.contentfulPage
 
 	return (
 		<Segment as='main' padded vertical basic>
 			<Helmet>
-				<title>{title}</title>
+				<title>{header}</title>
 			</Helmet>
 
 			<Container text textAlign='justified'>
-				<Header as='h1'>{title}</Header>
+				<Header as='h1'>{header}</Header>
 				<Header.Content>{richTextToJsx(body?.json)}</Header.Content>
 			</Container>
 
@@ -48,7 +48,7 @@ export default React.memo(Contact)
 
 export const pageQuery = graphql`
 	query {
-		contentfulPage(title: {eq: "Contact Us"}) {
+		contentfulPage(title: {eq: "Contact"}) {
 			...PageFragment
 			content {
 				... on ContentfulForm {

@@ -13,9 +13,7 @@ import {
 import { PortfolioItem, media } from 'semantic-styled-ui'
 
 const Portfolio = ({ data }) => {
-	const {
-		title, header, body, content,
-	} = data.contentfulPage
+	const { header, body, content } = data.contentfulPage
 
 	return (
 		<Segment as='main' padded vertical basic>
@@ -65,7 +63,7 @@ export default React.memo(Portfolio)
 
 export const pageQuery = graphql`
 	query {
-		contentfulPage(title: {eq: "Our Work"}) {
+		contentfulPage(title: {eq: "Portfolio"}) {
 			...PageFragment
     	content {
       	... on ContentfulPiece {

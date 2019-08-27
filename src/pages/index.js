@@ -81,7 +81,6 @@ export const pageQuery = graphql`
 
 export const pageFragment = graphql`
   fragment PageFragment on ContentfulPage {
-		title
 		header
 		body {
 			json

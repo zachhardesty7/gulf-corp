@@ -13,9 +13,7 @@ import {
 import { PortfolioItem, media } from 'semantic-styled-ui'
 
 const TenantRelationships = ({ data }) => {
-	const {
-		title, header, body, content,
-	} = data.contentfulPage
+	const { header, body, content } = data.contentfulPage
 
 	return (
 		<Segment as='main' padded vertical basic>

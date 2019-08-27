@@ -38,9 +38,7 @@ S.Blurb = styled(Blurbs.Item)`
 `
 
 const Services = ({ data }) => {
-	const {
-		title, header, body, content,
-	} = data.contentfulPage
+	const { header, body, content } = data.contentfulPage
 
 	return (
 		<Segment as='main' padded vertical basic>
