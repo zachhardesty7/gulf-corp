@@ -38,16 +38,18 @@ S.Blurb = styled(Blurbs.Item)`
 `
 
 const Services = ({ data }) => {
-	const { title, body, content } = data.contentfulPage
+	const {
+		title, header, body, content,
+	} = data.contentfulPage
 
 	return (
 		<Segment as='main' padded vertical basic>
 			<Helmet>
-				<title>{title}</title>
+				<title>{header}</title>
 			</Helmet>
 
 			<Container textAlign='justified'>
-				{/* <Header as='h1'>{title}</Header> */}
+				{/* <Header as='h1'>{header}</Header> */}
 				<Header.Content>{richTextToJsx(body?.json)}</Header.Content>
 			</Container>
 

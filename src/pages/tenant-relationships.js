@@ -13,12 +13,14 @@ import {
 import { PortfolioItem, media } from 'semantic-styled-ui'
 
 const TenantRelationships = ({ data }) => {
-	const { title, body, content } = data.contentfulPage
+	const {
+		title, header, body, content,
+	} = data.contentfulPage
 
 	return (
 		<Segment as='main' padded vertical basic>
 			<Helmet>
-				<title>{title}</title>
+				<title>{header}</title>
 			</Helmet>
 			<Container
 				textAlign='left'
@@ -29,7 +31,7 @@ const TenantRelationships = ({ data }) => {
 					}
 				`}
 			>
-				<Header as='h1'>{title}</Header>
+				<Header as='h1'>{header}</Header>
 				<Header.Content>{richTextToJsx(body?.json)}</Header.Content>
 			</Container>
 			<Segment padded vertical basic>
