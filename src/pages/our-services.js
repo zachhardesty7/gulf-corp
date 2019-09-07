@@ -17,6 +17,10 @@ const S = {}
 
 /* background overlay to dim and saturate */
 S.Blurb = styled(Blurbs.Item)`
+	color: white;
+	.header {
+		color: white;
+	}
 	.content {
 		font-size: 1.25em;
 	}
