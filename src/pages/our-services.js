@@ -2,7 +2,7 @@ import React from 'react'
 import { Helmet } from 'react-helmet'
 import { graphql } from 'gatsby'
 import { richTextToJsx } from '@madebyconnor/rich-text-to-jsx'
-import { Blurbs } from 'semantic-styled-ui'
+import { Blurbs, Hero } from 'semantic-styled-ui'
 import styled from 'styled-components'
 
 import GImage from 'gatsby-image'
@@ -41,6 +41,10 @@ S.Blurb = styled(Blurbs.Item)`
   }
 `
 
+S.Hero = styled(Hero)`
+	margin: 0 20px 1em calc(20px + 0.5%);
+`
+
 const Services = ({ data }) => {
 	const { header, body, content } = data.contentfulPage
 
@@ -51,21 +55,34 @@ const Services = ({ data }) => {
 			</Helmet>
 
 			<Container textAlign='justified'>
-				{/* <Header as='h1'>{header}</Header> */}
 				<Header.Content>{richTextToJsx(body?.json)}</Header.Content>
 			</Container>
 
-			<Blurbs padding='compact' fullWidth='gutter' celled>
-				{content.map(blurb => (
-					<S.Blurb
-						key={blurb.title}
-						header={blurb.title}
-						overlay={blurb.backgroundOverlayColor}
-						backgroundImage={<GImage fluid={blurb.backgroundImage.fluid} />}
+			{content
+				.filter(banner => banner.internal.type === 'ContentfulBanner')
+				.map(banner => (
+					<S.Hero
+						title={banner.title}
+						key={banner.title}
 					>
-						{richTextToJsx(blurb.content?.json)}
-					</S.Blurb>
-				))}
+						{<GImage fluid={banner.image.fluid} alt={banner.title} />}
+					</S.Hero>
+				))
+			}
+
+			<Blurbs padding='compact' fullWidth='gutter'>
+				{content
+					.filter(blurb => blurb.internal.type === 'ContentfulBlurb')
+					.map(blurb => (
+						<S.Blurb
+							key={blurb.title}
+							header={blurb.title}
+							overlay={blurb.backgroundOverlayColor}
+							backgroundImage={<GImage fluid={blurb.backgroundImage.fluid} />}
+						>
+							{richTextToJsx(blurb.content?.json)}
+						</S.Blurb>
+					))}
 			</Blurbs>
 		</Segment>
 	)
@@ -89,6 +106,21 @@ export const pageQuery = graphql`
 						}
 					}
 					backgroundOverlayColor
+					internal {
+						type
+					}
+				}
+				...on ContentfulBanner {
+					title
+					image {
+						fluid(maxWidth: 500) {
+							...GatsbyContentfulFluid_withWebp
+						}
+					}
+					# overlayColor
+					internal {
+						type
+					}
 				}
 			}
 		}
