@@ -62,6 +62,7 @@ const Services = ({ data }) => {
 				.filter(banner => banner.internal.type === 'ContentfulBanner')
 				.map(banner => (
 					<S.Hero
+						size='compact'
 						title={banner.title}
 						key={banner.title}
 					>
