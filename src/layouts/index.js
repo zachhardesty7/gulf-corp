@@ -70,6 +70,7 @@ const Template = ({ children }) => {
 			}
 			footer: contentfulFooter {
 				company
+				fullWidth
 			}
 		}
 	`)
@@ -122,6 +123,7 @@ const Template = ({ children }) => {
 				<Footer
 					copyright={footer.company}
 					separated
+					fullWidth={footer.fullWidth}
 					developerName='Zach Hardesty'
 					developerLink='https://zachhardesty.com'
 				/>

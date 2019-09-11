@@ -3,6 +3,7 @@ import { Helmet } from 'react-helmet'
 import { graphql } from 'gatsby'
 import { richTextToJsx } from '@madebyconnor/rich-text-to-jsx'
 import GImage from 'gatsby-image'
+import styled from 'styled-components'
 
 import {
 	Container,
@@ -11,6 +12,13 @@ import {
 	Segment,
 } from 'semantic-ui-react'
 import { PortfolioItem, media } from 'semantic-styled-ui'
+
+const S = {} // SC namespace
+
+S.Header = styled(Header)`
+	color: ${({ color }) => color};
+	border-bottom: 3px solid #fe0000;
+`
 
 const TenantRelationships = ({ data }) => {
 	const { header, body, content } = data.contentfulPage
@@ -29,7 +37,7 @@ const TenantRelationships = ({ data }) => {
 					}
 				`}
 			>
-				<Header as='h1'>{header}</Header>
+				<S.Header as='h1' color='#172749'>{header}</S.Header>
 				<Header.Content>{richTextToJsx(body?.json)}</Header.Content>
 			</Container>
 			<Segment padded vertical basic>

@@ -29,8 +29,8 @@ S.Blurb = styled(Blurbs.Item)`
     height: 100%;
     width: 100.5%;
     background: ${({ overlay }) => overlay};
-    filter: saturate(2) sepia(0.4) alpha(opacity=85);
-		opacity: 0.85;
+    filter: saturate(2) sepia(0.4) alpha(opacity=75);
+		opacity: 0.75;
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center +45%;
@@ -43,6 +43,17 @@ S.Blurb = styled(Blurbs.Item)`
 
 S.Hero = styled(Hero)`
 	margin: 0 20px 1em calc(20px + 0.5%);
+
+	& > .ui.container {
+		width: 90%; /* FIXME: hacky way to move title over */
+	}
+
+	&&& h1 {
+		margin-top: 0;
+		/* font-style: italic; */
+		font-weight: normal;
+		font-family: Tahoma, Arial, Helvetica, sans-serif !important;
+	}
 `
 
 const Services = ({ data }) => {
@@ -62,6 +73,8 @@ const Services = ({ data }) => {
 				.filter(banner => banner.internal.type === 'ContentfulBanner')
 				.map(banner => (
 					<S.Hero
+						underline
+						baseline='top'
 						size='compact'
 						title={banner.title}
 						key={banner.title}

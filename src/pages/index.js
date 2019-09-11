@@ -7,22 +7,20 @@ import styled, { withTheme } from 'styled-components'
 import { Blurbs, Hero } from 'semantic-styled-ui'
 
 const Slider = styled(Hero)`
-	&&& {
-		h1 {
-			line-height: 1em;
-			margin-bottom: 0;
-			vertical-align: baseline;
-			font-weight: bolder !important;
-			font-style: italic;
-			font-family: Tahoma, Arial, Helvetica, sans-serif !important;
-		}
+	&&& h1 {
+		line-height: 1em;
+		margin-bottom: 0;
+		vertical-align: baseline;
+		font-weight: bolder !important;
+		font-style: italic;
+		font-family: Tahoma, Arial, Helvetica, sans-serif !important;
+	}
 
-		h2 {
-			margin-top: 0;
-			font-style: italic;
-			font-weight: normal;
-			font-family: Tahoma, Arial, Helvetica, sans-serif !important;
-		}
+	&&&	h2 {
+		margin-top: 0;
+		font-style: italic;
+		font-weight: normal;
+		font-family: Tahoma, Arial, Helvetica, sans-serif !important;
 	}
 `
 
