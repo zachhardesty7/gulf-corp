@@ -15,10 +15,6 @@ npm install
 npm run dev
 ```
 
-## Known Issues
-
-* none
-
 ## Contributing
 
 1. Fork it (<https://github.com/zachhardesty7/gulf-corp/fork>)
